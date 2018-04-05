@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <script src="script.js"></script>
+    <script src="./scripts/script.js"></script>
 </head>
 <body>
 <header>
     <ul>
-        <li><img src="./images/knesla_logo.png" alt="Knesla Logo" width="150px;"></li>
-        <li><i class="fas fa-user-circle"></i> Hej Pedram</li>
+        <li id="logo"><img src="./images/knesla_logo.png" alt="Knesla Logo" width="150px;"></li>
+        <li><i class="fas fa-user-circle"></i> Hej Elon</li>
         <li><i class="fas fa-user-circle"></i> Mitt konto</li>
         <li><i class="fas fa-shopping-cart"></i> (0)</li>
     </ul>

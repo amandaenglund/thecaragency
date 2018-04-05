@@ -23,3 +23,9 @@ footer {
     padding: 0.5em;
 
 }
+
+/*************/
+
+ul {
+    list-style: none;
+}

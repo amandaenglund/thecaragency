@@ -9,12 +9,22 @@
     <script src="script.js"></script>
 </head>
 <body>
+<header>
+
+
+</header>
+<div id="content">
 
 <?php
 
-
+echo "Hello World!";
 
 ?>
-    
+
+</div>    
+<footer>
+
+
+</footer>
 </body>
 </html>

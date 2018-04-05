@@ -11,7 +11,7 @@ http://amandaenglund.wieg17.se/thecaragency/
 Projektbeskrivning:
 Året är 1992. Multimiljonären Janne Kemi har valt att investera i Företaget "The Car Agency" och kommer dessutom göra en ny hemsida till företaget. "The Car Agency" drivs ifrån Göteborg, där de sitter på kunskap som gör det möjligt att producera bilar som kan köras 100% på el, bilarna kallas för 'Knesla' och Janne har räknat ut att om "The Car Agency" har en hemsida där människor kan köpa produkterna kommer detta göra honom och alla inblandade till e-handels-rockstars $$$. Janne plockar in fyra duktiga webbutvecklare som gör e-handelshemsidan till företaget. 
 
-På hemsidan kommer man kunna köpa nyproducerade, superfräscha 'Kneslor', få den fraktad hem till din dörr och det kommer finnas en hel del viktiga funktioner som gör köpet på hemsidan blir en fröjd för både kunderna och administratörerna. 
+På hemsidan kommer man kunna köpa 'The Car Agency's' nyproducerade, superfräscha 'Kneslor', få den fraktad hem till din dörr och det kommer finnas en hel del viktiga funktioner som gör köpet på hemsidan blir en fröjd för både kunderna och administratörerna. 
 
 Senare året 1992 - november - Janne Kemi var på nattklubb tillsammans med sin vän Elon och berättade om sin senaste investering i "The Car Agency", om elbilarna & framtidsdrömmarna i att Knesla-fordonen inte kommer släppa ut någon gas utan bara i tysthet, fart och harmoni transportera oss människor dit vi vill. Idag, nästan 25 år senare har inte Janne Kemi uttalat sig, men vi vet idag att det står ett företag som heter Tesla där Elon Musk är VD... nånting gick snett efter den nattklubbsfesten, och vi har försökt förstå vad som egentligen hände men många misstankar går kring att Tesla har snott hela Knesla's koncept.. 
 

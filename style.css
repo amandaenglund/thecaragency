@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 0.1em;
+}
+
+header {
+    background-color: rgb(223, 222, 222);
+    padding: 0.5em;
+
+}
+
+nav {
+    background-color: rgb(172, 172, 172);
+    padding: 0.5em;
+}
+
+
+footer {
+    background-color: rgb(223, 222, 222);
+    padding: 0.5em;
+
+}

@@ -45,6 +45,8 @@ ul {
 
 li {
     flex: 0 0 auto;
+
+    padding-left: 20px;
 }
 
 li:nth-child(1) {

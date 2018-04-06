@@ -32,5 +32,9 @@ ul {
 }
 
 li {
-    
+    flex: 0 0 auto;
+}
+
+li:nth-child(1) {
+	margin-right: auto; /*applied only to the right*/
 }

@@ -15,12 +15,24 @@ header {
 nav {
     background-color: rgb(172, 172, 172);
     padding: 0.5em;
+    text-align: center;
 }
 
 
 footer {
     background-color: rgb(223, 222, 222);
     padding: 0.5em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#newsletter {
+
+}
+
+#about {
 
 }
 

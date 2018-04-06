@@ -23,9 +23,9 @@
 
 <!--Navigationskategorierna kommer sedan att importeras från Json eller databasen-->
 <nav>
-Model 1 <!--bara placeholder för nu-->
-Model 2 <!--bara placeholder för nu-->
-Model 3 <!--bara placeholder för nu-->
+Model 1 |<!--bara placeholder för nu-->
+Model 2 |<!--bara placeholder för nu-->
+Model 3 |<!--bara placeholder för nu-->
 Sport <!--bara placeholder för nu-->
 </nav>
 
@@ -33,17 +33,41 @@ Sport <!--bara placeholder för nu-->
 
 
 <div id="content">
-
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <?php
 
 echo "Hello World!";
 
 ?>
-
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 </div>    
 <footer>
 
-footer
+<div id="newsletter">
+
+<form action="/action_page.php">
+    <p>Prenumerera på Kneslas nyhetsbrev</p>
+  <input type="text" name="firstname" value="Ditt namn">
+  <br>
+  <input type="text" name="email" value="Din e-post">
+  <br>
+  <input type="submit" value="OK">
+</form> 
+
+</div>
+<div id="about">
+<p>The Car Agency</p>
+<p>Kungsgatan 100</p>
+<p>410 10 Göteborg</p>
+</div>
 
 </footer>
 

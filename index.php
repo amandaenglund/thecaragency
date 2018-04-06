@@ -10,6 +10,7 @@
     <script src="./scripts/script.js"></script>
 </head>
 <body>
+<div id="background">
 <header>
     <ul>
         <li id="logo"><img src="./images/knesla_logo.png" alt="Knesla Logo" width="150px;"></li>
@@ -38,6 +39,9 @@ Sport <!--bara placeholder för nu-->
 <br/>
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
 <?php
 
 echo "Hello World!";
@@ -48,7 +52,16 @@ echo "Hello World!";
 <br/>
 <br/>
 <br/>
-</div>    
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</div>  
+</div> <!--stänger background-->  
 <footer>
 
 <div id="newsletter">

@@ -7,17 +7,22 @@ body {
 }
 
 header {
-    background-color: rgb(223, 222, 222);
+    /*background-color: rgb(223, 222, 222);*/
     padding: 0.5em;
 
 }
 
 nav {
-    background-color: rgb(172, 172, 172);
+    background-color: rgba(172, 172, 172, 0.267);
     padding: 0.5em;
     text-align: center;
 }
 
+#background {
+    background-image: url("../images/knesla_background.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
 
 footer {
     background-color: rgb(223, 222, 222);
@@ -26,14 +31,6 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-}
-
-#newsletter {
-
-}
-
-#about {
-
 }
 
 /*************/

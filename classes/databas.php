@@ -41,13 +41,12 @@ class Admin extends Database {
     
     protected $tabel = 'admins';
 
-    public function login($email,$password) {
+    public function login($email) {
         $this->preQuery();
-        $query = "SELECT email FROM";
+        $query = "SELECT email,password FROM";
         $query .= " $this->tabel";
         $query .= " WHERE email =";
-        $query .= " '".$email."' AND";
-        $query .= " password = '".$password."'";
+        $query .= " '".$email."'";
         $results = $this->conn->query($query);
         $row = $results->fetch_assoc();
         $this->connClose();

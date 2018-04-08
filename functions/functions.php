@@ -1,18 +1,22 @@
 <?php
-session_start();
 require '../classes/databas.php';
 
 function adminLogin($email,$password){
   $admindb = new Admin();
-  $results = $admindb->login($email,$password);
-  if($results){
-    $_SESSION['admin']=$results['email'];
-  }else{
-    return 0;
-  }
-
+  $results = $admindb->login($email);
+  return password_verifying($password,$results['password']);
 }
-adminLogin('','');
+
+
+function password_encrypting($password){
+ return password_hash($password, PASSWORD_DEFAULT);
+}
+
+ 
+function password_verifying($password,$hash){
+  return password_verify($password, $hash );
+}
+
 
 
 ?>

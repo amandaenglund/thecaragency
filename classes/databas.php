@@ -55,6 +55,15 @@ class Admin extends Database {
         $this->connClose();
         return $row;
     }
+    
+    public function signUp($email,$password,$name){
+        $query = "INSERT INTO";
+        $query .= " $this->tabel";
+        $query .= " VALUE('".$email."','".$password."','".$name."',0)";
+        $this->queries($query);
+    }
+
+
 
   
 }

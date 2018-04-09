@@ -17,6 +17,10 @@ function password_verifying($password,$hash){
   return password_verify($password, $hash );
 }
 
-
+function signupAdmin($email,$password,$name){
+$admindb = new Admin();
+$password = password_encrypting($password);
+$admindb->signUp($email,$password,$name);
+}
 
 ?>

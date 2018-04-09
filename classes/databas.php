@@ -3,7 +3,7 @@
 class Database {
     protected $_conn;
     protected $_result;
-    protected $_numRows;
+    
 
     public function __construct() {
         if ($this->_conn == null) {
@@ -17,7 +17,6 @@ class Database {
 
     protected function queries($query){
         $this->_result = $this->_conn->query($query);
-        $this->_numRows = $this->_result->num_rows;
     }
 
     protected function selectTabel() {

@@ -4,8 +4,20 @@ require '../classes/databas.php';
 function adminLogin($email,$password){
   $admindb = new Admin();
   $results = $admindb->login($email);
-  return password_verifying($password,$results['password']);
-}
+  if($results){
+    if(password_verifying($password,$results['password'])){
+      if($results['approved'] == 1){
+        return true;
+      }else{
+        return 'Not approved';
+      }
+    }else{
+      return 'Password is not valid';
+    }
+  }else{
+    return 'Email is not valid';
+  }
+} 
 
 
 function password_encrypting($password){

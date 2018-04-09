@@ -45,7 +45,7 @@ class Admin extends Database {
     protected $tabel = 'admins';
 
     public function login($email) {
-        $query = "SELECT email,password FROM";
+        $query = "SELECT email,password,approved FROM";
         $query .= " $this->tabel";
         $query .= " WHERE email =";
         $query .= " '".$email."'";

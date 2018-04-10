@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./scripts/script.js"></script>
 </head>
 <body>
@@ -43,9 +45,7 @@ Sport <!--bara placeholder för nu-->
 <br/>
 <br/>
 <?php
-
 echo "Hello World!";
-
 ?>
 <br/>
 <br/>
@@ -65,16 +65,10 @@ echo "Hello World!";
 <footer>
 
 <div id="newsletter">
-
-<form action="./server/newsletter.php" method="post">
     <p>Prenumerera på Kneslas nyhetsbrev</p>
-  <input type="text" name="subscribeFirstname" value="Ditt namn" id="subscribeFirstname">
-  <br>
-  <input type="text" name="subscribeEmail" value="Din e-post" id="subscribeEmail">
-  <br>
-  <input type="submit" name="submit" value="OK" id="subscribeBtn">
-</form>
-
+    <input type="text" id="subscribeName" placeholder="Ditt namn" /><br />
+    <input type="text" id="subscribeEmail" placeholder="Din e-post"/><br />
+    <input type="submit"  value="OK" onclick="Subscribe()" />
 </div>
 <div id="about">
 <p>The Car Agency</p>
@@ -83,10 +77,6 @@ echo "Hello World!";
 </div>
 
 </footer>
-
-
-<!-- Optional JavaScript -->
-<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 
 </body>
 </html>

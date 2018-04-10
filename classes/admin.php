@@ -47,13 +47,13 @@
         
         public function unapprovedUsers() {
             $params = array();
-            $DB = Database::getDB(); 
-            array_push($params, array('i' => 0));
+            $DB = Database::getDB();
+            $params['approved'] = array('i' => 1);
             $result = $DB->query("SELECT email, name FROM Admins WHERE (approved = ?)", $params);
             return $result ? $result : array();
         }
         
-        public function approvedUser($email) {
+        public function approveUser($email) {
             $params = array();
             $DB = Database::getDB(); 
             $params['email'] = array('s' => $email);

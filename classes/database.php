@@ -17,7 +17,7 @@
         private function __construct() {
             $this->mysqli = new mysqli(SERVER, USERNAME, PASSWORD, DATABASE);
             if($this->mysqli->connect_error) die("Connection error");
-            $this->mysqli->query("SET NAMES 'latin1'");
+            $this->mysqli->query("SET NAMES 'utf8'");
         }
         
         public static function getDB() {

@@ -66,14 +66,14 @@ echo "Hello World!";
 
 <div id="newsletter">
 
-<form action="/action_page.php">
+<form action="./server/newsletter.php" method="post">
     <p>Prenumerera på Kneslas nyhetsbrev</p>
-  <input type="text" name="firstname" value="Ditt namn">
+  <input type="text" name="subscribeFirstname" value="Ditt namn" id="subscribeFirstname">
   <br>
-  <input type="text" name="email" value="Din e-post">
+  <input type="text" name="subscribeEmail" value="Din e-post" id="subscribeEmail">
   <br>
-  <input type="submit" value="OK">
-</form> 
+  <input type="submit" name="submit" value="OK" id="subscribeBtn">
+</form>
 
 </div>
 <div id="about">

@@ -1,0 +1,188 @@
+* {
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+html {
+    overflow-y: scroll;
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+    -webkit-overflow-scrolling : touch !important;
+    touch-action: manipulation;
+}
+
+body {
+    margin: 0px; padding: 0px; font-family: 'Roboto', sans-serif;
+    font-size: 1em; line-height: 1.5; height: 100%;
+}
+
+*, *:focus, *:hover {
+    outline: 0;	outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+h1, h2, h3 {
+    margin: 0px; padding: 0px;
+}
+
+.center { text-align: center; }
+
+.container {
+    margin: 0px;
+    width: 100%;
+    padding: 0px;
+}
+
+.footer {
+    font-size: 0.8em; height: 60px;
+    text-align: center; color: #ccc;
+    padding: 20px; background-color: #000;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-flow: row nowrap;
+    width: 100%; padding: 15px;
+    cursor: default; background-color: #000;
+    line-height: 1.25; height: 113px;
+}
+
+.header a, .header label {
+    color: #ccc; cursor: pointer;
+    text-align: center; transition: 0.25s;
+    text-decoration: none;    
+}
+
+.header a:hover, .header label:hover {
+    color: #fff;
+    transition: 0.25s; 
+}
+
+.header a:first-child { max-width: 150px; font-size: 1.5em; }
+.header a:nth-child(2), .header label:nth-child(2) { margin-left: auto; }
+.header a img { width: 100%; }
+.header a i, .header label i { font-size: 1.5em; }
+.header a span, .header label span { display: inline-block; width: 100%; font-size: 0.8em; }
+
+.content {
+    padding: 20px; display: flex;
+    min-height: calc(100vh - 173px);
+    align-items: center;
+    align-content: center;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#signin, #signup {
+    padding: 10px; border: 1px #ccc solid;
+    border-radius: 3px; width: 350px;
+}
+
+#signup { display: none; }
+
+.input {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+input[type=text], input[type=password], input[type=number], input[type=email] {
+    padding: 0px; margin: 0px; border: 1px #ccc solid;
+    width: 100%; height: 30px; line-height: 30px; border-radius: 3px;
+    margin-top: 0px; text-indent: 5px; color: inherit;
+    -webkit-appearance: none; appearance: none;
+    -moz-appearance:textfield;
+}
+
+.button {    
+    padding: 7px; margin: 20px 0px 10px 0px; 
+    vertical-align: middle; overflow: hidden;
+    text-decoration: none !important; color: #fff;
+    border-radius: 3px; background-color: #0277bd;
+    text-align: center; cursor: pointer; white-space: nowrap;
+    transition: all 0.3s ease; font-size: 1em;
+    -webkit-transition: all 0.3s ease; 
+}
+.button:hover { box-shadow:0 4px 8px 0 rgba(0,0,0,0.2),0 3px 10px 0 rgba(0,0,0,0.19); }
+
+.main {
+    flex: 1 100%;
+    max-width: 1280px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+.row > .title {
+    flex: 1 100%;
+    height: 40px;
+    padding-bottom: 5px; border-bottom: 1px #555 solid;    
+}
+
+.row > .title > span {
+    margin-right: 5px;
+    float: right; font-size: 2em;
+    margin-top: -5px; cursor: pointer;
+    color: #555; transition: 0.25s;
+}
+
+.row > .title > span:hover {
+    color: #000; transition: 0.25s;
+}
+
+.row > .column {
+    flex: 1; margin: 1%;
+}
+
+.row > .column > .title {
+    color: #fff; background-color: #333; border-radius: 3px;
+    line-height: 30px; padding: 5px; font-size: 0.9em;
+}
+
+.row > .column > .title > span {
+    float: right; margin-right: 5px;
+    font-size: 1.5em; cursor: pointer;
+}
+
+input[type='file']{
+    opacity: 0;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    font-size: 0;
+    position: absolute;
+    margin-left: -18px;
+}
+
+
+
+
+form {
+    width: 24px; 
+}
+
+.uploadFile {
+    display: block;
+    height: 100%; width: 100%; opacity: 0;
+    overflow: hidden; margin-top: -25px;
+}
+
+.row > .column > .body {
+    padding: 5px;
+}
+
+.frame {
+    width: 0px;
+    height: 0px;
+    border: none;
+    display: none;
+}

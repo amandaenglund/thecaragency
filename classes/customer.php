@@ -27,6 +27,10 @@
             unset($_SESSION['customer']);
         }
 
+        private function getCustomerid(){
+            return $this->customer['customerID'];
+        }
+
         private function pwGenerator(){
             $charRange = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789@#$()";
             $pw = null;
@@ -61,13 +65,20 @@
             $params['email'] = array('s' => $email);
             $params['compabyname'] = array('s' => $companyname);
             $params['contactname']  = array('s' => $contactname);
-            $params['phonenumber']  = array('i' => $phonenumber);
+            $params['phonenumber']  = array('s' => $phonenumber);
             $params['pass']  = array('s' => password_hash($password, PASSWORD_BCRYPT));
             $params['address']  = array('s' => $address);
             $params['postalcode']  = array('s' => $postalcode);
             $params['city']  = array('s' => $city);       
             $result= $DB->query("INSERT INTO Customers (email, companyName, contactName,phoneNumber,password,address,postalCode,city) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", $params);
-            return isset($result) ? $password : $result;
+            return $result ? $password : false;
+        }
+
+        public function getOrders(){
+            $params = array();
+            $DB = Database::getDB();
+            $customerid = $this->getCustomerid();
+            
         }
 
     }

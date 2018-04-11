@@ -111,11 +111,11 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
 .main {
     flex: 1 100%;
     max-width: 1280px;
+    align-self: flex-start;
 }
 
 .row {
     display: flex;
-    align-items: center;
     align-content: center;
     flex-flow: row wrap;
     justify-content: center;
@@ -140,7 +140,7 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
 }
 
 .row > .column {
-    flex: 1; margin: 1%;
+    flex: 1 31%; margin: 1%;
 }
 
 .row > .column > .title {
@@ -163,26 +163,20 @@ input[type='file']{
     margin-left: -18px;
 }
 
-
-
-
-form {
-    width: 24px; 
-}
-
-.uploadFile {
-    display: block;
-    height: 100%; width: 100%; opacity: 0;
-    overflow: hidden; margin-top: -25px;
-}
-
 .row > .column > .body {
     padding: 5px;
+    line-height: 30px;
 }
 
-.frame {
-    width: 0px;
-    height: 0px;
-    border: none;
-    display: none;
+input[type=checkbox] { width: 20px; height: 20px; vertical-align: middle; cursor: pointer; }
+
+#image {
+    color: red;
+    text-align: center;
 }
+
+#image i { font-size: 3em; margin: 50px 25px; }
+
+#image img { max-width: 100%; }
+
+#image span { font-size: 0.9em;  }

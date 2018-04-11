@@ -16,4 +16,5 @@
             return $DB->query("SELECT * FROM Subscribers", $params);
         }
     }
+    
 ?>

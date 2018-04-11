@@ -7,7 +7,7 @@
 Inlogg: admin@thecaragency.se
 <br/>
 Password: admin
-
+<a href="http://amandaenglund.wieg17.se/thecaragency/admin/">DEMO Admin</a>
 ### Ambitionsnivå: VG
 
 <a href="http://amandaenglund.wieg17.se/thecaragency/">DEMO</a>

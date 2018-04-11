@@ -1,14 +1,9 @@
 <?php
-
-
+    require('database.php');
 class Products {
 
     private $admin;
     
-    function __construct($prodID){
-        
-        
-    }
     
     public function getProduct($prodID){
         $params = array();
@@ -20,11 +15,30 @@ class Products {
 
    }
 
-    public function getProducts() {
-        
 
+    public function getProducts() {
+
+        $params = array();
+        $DB = Database::getDB();
+        
+        $result = $DB->query("SELECT * FROM Products ", $params);
+        return $result;
    }
 
+
+}
+
+$test = new Products();
+
+$array = $test->getProducts();
+
+
+foreach($array as $value){
+    echo "<div class=".$value['productID'].">";
+    echo "<img src='../images/".$value['productID'].".jpg'><br/>";
+    echo $value['description']."<br/>";
+    echo $value['modelYear']."<br/>";
+    echo "</div>";
 }
 
 

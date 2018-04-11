@@ -19,7 +19,8 @@
         }
         
         $subscriber = new Subscriber();
-        if($result = $subscriber->add($_POST['name'], $_POST['email'])) $response = 'SUCCESS';
+        $result = $subscriber->add($_POST['name'], $_POST['email']);
+        if($result) $response = 'SUCCESS';
         else if($result === false) {
             $DB = Database::getDB();
             if($DB->getError() == 1062) $response = 'DUPLICATE';

@@ -3,6 +3,12 @@
 ## THE CAR AGENCY
 ### Medlemmar: Faroch, Pedram, André, Amanda
 
+### Inloggningsuppgifter
+Inlogg: admin@thecaragency.se
+<br/>
+Password: admin
+<br/>
+<a href="http://amandaenglund.wieg17.se/thecaragency/admin/">DEMO Admin</a>
 ### Ambitionsnivå: VG
 
 <a href="http://amandaenglund.wieg17.se/thecaragency/">DEMO</a>
@@ -15,10 +21,6 @@ På hemsidan kommer man kunna köpa 'The Car Agency's' nyproducerade, superfräs
 <br/>
 Senare året 1992 - november - Janne Kemi var på nattklubb tillsammans med sin vän Elon och berättade om sin senaste investering i "The Car Agency", om elbilarna & framtidsdrömmarna i att Knesla-fordonen inte kommer släppa ut någon gas utan bara i tysthet, fart och harmoni transportera oss människor dit vi vill. Idag, nästan 25 år senare har inte Janne Kemi uttalat sig, men vi vet idag att det står ett företag som heter Tesla där Elon Musk är VD... nånting gick snett efter den nattklubbsfesten, och vi har försökt förstå vad som egentligen hände men många misstankar går kring att Tesla har snott hela Knesla's koncept.. 
 
-### Inloggningsuppgifter
-Inlogg:
-<br/>
-Password:
 
 ---------------------------------------------------------------------------------------------------------------------------------
 

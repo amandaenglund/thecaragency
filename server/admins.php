@@ -11,18 +11,18 @@
         
         $_POST['email'] = trim(strtolower($_POST['email']));
         if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $output['msg'] = 'Fel format e-postadress!';
+            $output['error'] = 'Fel format e-postadress!';
             die(json_encode($output));
         }
         
         $_POST['password'] = trim($_POST['password']);
         if(strlen($_POST['password']) < 4) {
-            $output['msg'] = 'Lösenordet måste vara minst 4 bokstäver!';
+            $output['error'] = 'Lösenordet måste vara minst 4 bokstäver!';
             die(json_encode($output));
         }
         
         if($admin->logIn($_POST['email'], $_POST['password'])) $output = array('error' => false);
-        else $output['msg'] = 'Fel användarnamn eller lösenord!';
+        else $output['error'] = 'Fel användarnamn eller lösenord!';
         
     } else if(($_POST['action'] == 'create') && isset($_POST['email']) && isset($_POST['name']) && isset($_POST['password'])) {
         
@@ -44,7 +44,8 @@
             die(json_encode($output));
         }
         
-        if($result = $admin->createUser($_POST['email'], $_POST['name'], $_POST['password'])) $output = array('error' => false);
+        $result = $admin->createUser($_POST['email'], $_POST['name'], $_POST['password']);
+        if($result) $output = array('error' => false);
         else if($result === false) {
             $DB = Database::getDB();
             if($DB->getError() == 1062) $output['error'] = 'E-postadress duplicat!';
@@ -57,8 +58,9 @@
             $output['error'] = 'Fel format e-postadress!';
             die(json_encode($output));
         }
-
-        if($result = $admin->approvedUser($_POST['email'])) $output = array('error' => false);
+        
+        $result = $admin->approvedUser($_POST['email']);
+        if($result) $output = array('error' => false);
         else if($result === 0) $output['error'] = 'Användaren har redan godkänts!';
     }
     

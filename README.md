@@ -8,10 +8,10 @@ Inlogg: admin@thecaragency.se
 <br/>
 Password: admin
 <br/>
-<a href="http://amandaenglund.wieg17.se/thecaragency/admin/">DEMO Admin</a>
+<a href="http://farochmehri.wieg17.se/thecaragency/admin/">DEMO Admin</a>
 ### Ambitionsnivå: VG
 
-<a href="http://amandaenglund.wieg17.se/thecaragency/">DEMO</a>
+<a href="http://farochmehri.wieg17.se/thecaragency/">DEMO</a>
 
 
 # Projektbeskrivning:

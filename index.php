@@ -9,3 +9,6 @@ require ('header.php');
 
 </div>  
 </div> <!--stänger background-->  
+<?php 
+require('footer.php');
+?>

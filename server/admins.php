@@ -7,7 +7,7 @@
     require('../classes/admin.php');
     $admin = new Admin();
     
-    if(($_POST['action'] == 'signin') && isset($_POST['email']) && isset($_POST['password'])) { 
+    if(($_POST['action'] == 'SIGNIN') && isset($_POST['email']) && isset($_POST['password'])) { 
         
         $_POST['email'] = trim(strtolower($_POST['email']));
         if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
@@ -21,10 +21,10 @@
             die(json_encode($output));
         }
         
-        if($admin->logIn($_POST['email'], $_POST['password'])) $output = array('error' => false);
+        if($admin->signIn($_POST['email'], $_POST['password'])) $output = array('error' => false);
         else $output['error'] = 'Fel användarnamn eller lösenord!';
         
-    } else if(($_POST['action'] == 'create') && isset($_POST['email']) && isset($_POST['name']) && isset($_POST['password'])) {
+    } else if(($_POST['action'] == 'CREATE') && isset($_POST['email']) && isset($_POST['name']) && isset($_POST['password'])) {
         
         $_POST['email'] = trim(strtolower($_POST['email']));
         if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
@@ -51,7 +51,7 @@
             if($DB->getError() == 1062) $output['error'] = 'E-postadress duplicat!';
         }
         
-    } else if(($_POST['action'] == 'approve') && isset($_POST['email'])) {
+    } else if(($_POST['action'] == 'APPROVE') && isset($_POST['email']) && $admin->isSignedIn()) {
         
         $_POST['email'] = trim(strtolower($_POST['email']));
         if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {

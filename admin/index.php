@@ -1,9 +1,10 @@
 <?php
     require('../classes/database.php');
     require('../classes/admin.php');
+    
     $admin = new Admin();
-    if($admin->isLoggedIn()) die(header('Location: ./home.php'));
-    else $admin->logOut();
+    if($admin->isSignedIn()) die(header('Location: ./home.php'));
+    else $admin->signOut();
 ?>
 <!doctype html>
 <html lang="sv"><head>
@@ -14,13 +15,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/917257e2ef.js"></script>
 <script>
-    
     $(document).on('keypress', 'input', function(event){ 
         if(event.which == 13) $(this).parent('div').parent('div').children('.button').click();
     });
+
+    const checkEmail = (email) => {
+        const regEx = new RegExp(/^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/);
+        return regEx.test(email);
+    };
     
     const createAccount = () => {
-        const data = {action: 'create'};
+        const data = {action: 'CREATE'};
         data.name = $('#signup').find('input').eq(0).val().trim();
         if(data.name == '') {
             alert('Ange ditt namn!');
@@ -28,7 +33,7 @@
         }
         
         data.email = $('#signup').find('input').eq(1).val().trim();
-        if(data.email == '') {
+        if(!checkEmail(data.email)) {
             alert('Ange din e-postadress!');
             return $('#signup').find('input').eq(1).focus();
         }
@@ -55,9 +60,9 @@
     };
     
     const signIn = () => {
-        const data = {action: 'signin'};
+        const data = {action: 'SIGNIN'};
         data.email = $('#signin').find('input').eq(0).val().trim();
-        if(data.email == '') {
+        if(!checkEmail(data.email)) {
             alert('Ange användarnamn!');
             return $('#signin').find('input').eq(0).focus();
         }

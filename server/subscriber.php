@@ -4,19 +4,14 @@
 
     if(isset($_POST['name']) && isset($_POST['email'])) {
         
-        require('../classes/database.php');
-        require('../classes/subscriber.php');
-        
-        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $output['error'] = 'Fel format e-postadress!';
-            die(json_encode($output));
-        }
+        $_POST['email'] = trim(strtolower($_POST['email']));
+        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) die('EMAIL');
         
         $_POST['name'] = trim(preg_replace('/\s+/', ' ', $_POST['name']));
-        if($_POST['name'] == '') {
-            $output['error'] = 'Ange ditt namn!';
-            die(json_encode($output));
-        }
+        if($_POST['name'] == '') die('NAME');
+
+        require('../classes/database.php');
+        require('../classes/subscriber.php');
         
         $subscriber = new Subscriber();
         $result = $subscriber->add($_POST['name'], $_POST['email']);

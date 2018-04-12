@@ -12,9 +12,9 @@
 ?>
 <div class="content">
     <div class="main">
-        <h3 class="center">Lägga till ny produkt</h3>
+        <h3 class="center">Redigera produkterna</h3>
         <div class="row">
-            <div class="title"><span onclick="addProduct()"><i class="fa fa-save"></i></span></div>
+            <div class="title"><span onclick="updateProduct()"><i class="fa fa-save"></i></span></div>
             <div class="column">
                 <div class="title">
                     <label>Ladda upp bilden (800x533)</label>
@@ -50,4 +50,7 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>
 <?php require('footer.php'); ?>

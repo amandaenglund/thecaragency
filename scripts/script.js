@@ -14,12 +14,22 @@ function Subscribe() {
     }
     
     $.post('./server/subscriber.php', data, function(res) {
-        if(res == 'DUPLICATE') alert('E-postadressen finns redan!');
-        else if(res == 'SUCCESS') {
+        if(res == 'DUPLICATE') {
+            alert('E-postadressen finns redan!');
+            $('#subscribeEmail').focus();
+            
+        } else if(res == 'EMAIL') {
+            alert('Fel format e-postadress!');
+            $('#subscribeEmail').focus();       
+                 
+        } else if(res == 'NAME') {
+            alert('Ange ditt namn!');
+            $('#subscribeName').focus();
+                
+        } else if(res == 'SUCCESS') {
             alert('Tack för din prenumeration!');
             $('#subscribeName, #subscribeEmail').val('');
-            
+                      
         } else alert('Ett fel uppstod!');
-        console.log(res);
     });
 };

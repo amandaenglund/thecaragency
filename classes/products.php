@@ -1,45 +1,39 @@
 <?php
-    require('database.php');
-class Products {
-
-    private $admin;
-    
-    
-    public function getProduct($prodID){
-        $params = array();
-        $DB = Database::getDB();
-        $params['productID'] = array('i' => $prodID);
-        $result = $DB->query("SELECT * FROM Products WHERE (productID = ?) LIMIT 1", $params);
+    class Products {
         
-        print_r($result);
+        public function create($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description) {
+            $DB = Database::getDB();
+            $DB->addParam('s', $name);
+            $DB->addParam('i', $year);
+            $DB->addParam('i', $price);
+            $DB->addParam('s', $battery);
+            $DB->addParam('i', $maxspeed);
+            $DB->addParam('d', $acceleration);
+            $DB->addParam('i', $quantity);
+            $DB->addParam('s', $description);
+            $result  = "INSERT INTO Products (name, modelYear, price, battery, maxSpeed, acceleration, unitsInStock, description) ";
+            $result .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $result  = $DB->query($result);
+            return $result ? $DB->insertID() : $result;
+        }
 
-   }
-
-
-    public function getProducts() {
-
-        $params = array();
-        $DB = Database::getDB();
+        public function getProduct($prodID) {
+            $DB = Database::getDB();
+            $DB->addParam('i', $prodID);
+            return $DB->query("SELECT * FROM Products WHERE (productID = ?) LIMIT 1");
+        }
         
-        $result = $DB->query("SELECT * FROM Products ", $params);
-        return $result;
-   }
+        public function insertCategory($catID, $prodID) {
+            $DB = Database::getDB();
+            $DB->addParam('i', $catID);
+            $DB->addParam('i', $prodID);
+            return $DB->query("INSERT INTO ProductCategory (categoryID, productID) VALUES (?, ?)");
+        }
+        
+        public function update($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description) {
+            
+        }
+        
 
-
-}
-
-$test = new Products();
-
-$array = $test->getProducts();
-
-
-foreach($array as $value){
-    echo "<div class=".$value['productID'].">";
-    echo "<img src='../images/".$value['productID'].".jpg'><br/>";
-    echo $value['description']."<br/>";
-    echo $value['modelYear']."<br/>";
-    echo "</div>";
-}
-
-
+    }
 ?>

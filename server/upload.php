@@ -6,7 +6,9 @@
         
         require('../classes/database.php');
         require('../classes/admin.php');
+        
         $admin = new Admin();
+        if(!$admin->isSignedIn()) die(json_encode($output));
         
         $tempDir = "../images/".$admin->getEmail();
         $image = file_get_contents('php://input');
@@ -32,7 +34,6 @@
             $output['error'] = 'Bildens bredd ska vara 800px!';
             die(json_encode($output));
         }
-        
 
         if($image[1] != 533) {
             $output['error'] = 'Bildens höjd ska vara 533px!';

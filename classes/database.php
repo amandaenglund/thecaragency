@@ -11,8 +11,10 @@
      * create an instance by using the constructor.
     **/
     final class Database {
-        private $mysqli, $errno;
+        
         private static $instance;
+        private $params = array();
+        private $mysqli, $errno;
         
         private function __construct() {
             $this->mysqli = new mysqli(SERVER, USERNAME, PASSWORD, DATABASE);
@@ -21,7 +23,9 @@
         }
         
         public static function getDB() {
-            return empty(self::$instance) ? self::$instance = new self() : self::$instance;
+            if(empty(self::$instance)) self::$instance = new self();
+            else self::$instance->params = array();
+            return self::$instance;
         }
         
         public function __destruct() {
@@ -32,19 +36,27 @@
             return $this->errno;
         }
         
-        private function bindParams($array) {
+        private function getParams() {
             $types  = '';
             $values = array();
-            foreach($array as $key => $value) {
+            foreach($this->params as $key => $value) {
                 $type = key($value);
-                $values[] = &$array[$key][$type];
+                $values[] = &$this->params[$key][$type];
                 $types .= $type;
             }
             
             $values = array_merge(array($types), $values);
             return (count($values) < 2) ? null : $values;
         }
-
+        
+        public function clearParams() {
+            $this->params = array();
+        }
+        
+        public function addParam($type, $value) {
+            array_push($this->params, array($type => $value));
+        }
+        
         /**
          * $query is the query string
          * $params is an array of array(type => value)
@@ -53,11 +65,11 @@
          * On select it returns the result as an associative array
          * On delete, insert and update it returns the number of the affected rows
         **/
-        public function query($query, $params = array()) {
+        public function query($query) {
             $output = false;
             $this->errno = 0;
-            if(!is_string($query) || !is_array($params)) return $output;
-            $params = $this->bindParams($params);
+            if(!is_string($query)) return $output;
+            $params = $this->getParams();
             $crud   = trim(strtoupper(explode(' ', $query)[0]));
             if(($crud == 'INSERT') && is_null($params)) return $output;
             

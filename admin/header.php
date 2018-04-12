@@ -3,7 +3,7 @@
     require('../classes/admin.php');
     
     $admin = new Admin();
-    if(!$admin->isLoggedIn()) die(header('Location: ./'));
+    if(!$admin->isSignedIn()) die(header('Location: ./'));
 ?>
 <!doctype html>
 <html lang="sv"><head>
@@ -24,5 +24,5 @@
             <a href="./orders.php"><i class="fa fa-shopping-cart"></i><span>Orderlistan</span></a>
             <a href="./newsletter.php"><i class="fa fa-envelope"></i><span>Nyhetsbrev</span></a>
             <a href="./customers.php"><i class="fa fa-users"></i><span>Kundlistan</span></a>
-            <a href="./logout.php"><i class="fa fa-sign-out"></i><span>Logga ut</span></a>
+            <a href="./signout.php"><i class="fa fa-sign-out"></i><span>Logga ut</span></a>
         </div>

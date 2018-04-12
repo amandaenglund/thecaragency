@@ -6,15 +6,14 @@
         
         public function __construct() {
             if(isset($_SESSION['USER'])) {
-                $params = array();
                 $DB = Database::getDB();
-                $params['email'] = array('s' => $_SESSION['USER']);
-                $result = $DB->query("SELECT name, email FROM Admins WHERE (email = ?) AND (approved = 1) LIMIT 1", $params);
+                $DB->addParam('s', $_SESSION['USER']);
+                $result = $DB->query("SELECT name, email FROM Admins WHERE (email = ?) AND (approved = 1) LIMIT 1");
                 if($result) $this->admin = reset($result);
             }
         }
         
-        public function isLoggedIn() {
+        public function isSignedIn() {
             return isset($this->admin);
         }
         
@@ -26,15 +25,14 @@
             return $this->admin['name'];
         }
         
-        public function logOut() {
+        public function signOut() {
             unset($_SESSION['USER']);
         }
         
-        public function logIn($email, $password) {
-            $params = array();
-            $DB = Database::getDB(); 
-            $params['email'] = array('s' => $email);
-            $result = $DB->query("SELECT password FROM Admins WHERE (email = ?) AND (approved = 1) LIMIT 1", $params);
+        public function signIn($email, $password) {
+            $DB = Database::getDB();
+            $DB->addParam('s', $email);
+            $result = $DB->query("SELECT password FROM Admins WHERE (email = ?) AND (approved = 1) LIMIT 1");
             if(!$result || !count($result)) return false;
             $result = reset($result)['password'];
             $result = password_verify($password , $result);
@@ -46,27 +44,24 @@
         }
         
         public function unapprovedUsers() {
-            $params = array();
             $DB = Database::getDB();
-            $params['approved'] = array('i' => 1);
-            $result = $DB->query("SELECT email, name FROM Admins WHERE (approved = ?)", $params);
+            $DB->addParam('i', 1);
+            $result = $DB->query("SELECT email, name FROM Admins WHERE (approved = ?)");
             return $result ? $result : array();
         }
         
         public function approveUser($email) {
-            $params = array();
-            $DB = Database::getDB(); 
-            $params['email'] = array('s' => $email);
-            return $DB->query("UPDATE Admins SET approved = 1 WHERE (email = ?) AND (approved = 0) LIMIT 1", $params);
+            $DB = Database::getDB();
+            $DB->addParam('s', $email);
+            return $DB->query("UPDATE Admins SET approved = 1 WHERE (email = ?) AND (approved = 0) LIMIT 1");
         }
         
         public function createUser($email, $name, $password) {
-            $params = array();
             $DB = Database::getDB();
-            $params['email'] = array('s' => $email);
-            $params['name']  = array('s' => $name);
-            $params['pass']  = array('s' => password_hash($password, PASSWORD_BCRYPT));
-            return $DB->query("INSERT INTO Admins (email, name, password) VALUES (?, ?, ?)", $params);
+            $DB->addParam('s', $email);
+            $DB->addParam('s', $name);
+            $DB->addParam('s', password_hash($password, PASSWORD_BCRYPT));
+            return $DB->query("INSERT INTO Admins (email, name, password) VALUES (?, ?, ?)");
         }
     }
     

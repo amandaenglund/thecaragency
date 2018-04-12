@@ -2,83 +2,73 @@
 /*
  - Som inloggad kund ska man kunna markera sin beställning som mottagen 
 
- - När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte 
+ - När man är inloggad som kund ska man kunna se sina gjorda beställningar och om det är skickade eller inte 
 
  + När besökare gör en beställning ska hen få ett lösenord till sidan där man kan logga in som kund*/
-    class customer {
+    class Customer {
         
         private $customer;
         
         public function __construct() {
-            if(isset($_SESSION['customer'])) {
-                $params = array();
+            if(isset($_SESSION['CUSTOMER'])) {
                 $DB = Database::getDB();
-                $params['customerID'] = array('i' => $_SESSION['customer']);
-                $result = $DB->query("SELECT * FROM Customers WHERE ( customerID = ?)  LIMIT 1", $params);
+                $DB->addParam('i', $_SESSION['CUSTOMER']);
+                $result = $DB->query("SELECT * FROM Customers WHERE (customerID = ?) LIMIT 1");
                 if($result) $this->customer = reset($result);
             }
         }
         
-        public function isLoggedIn() {
+        public function isSignedIn() {
             return isset($this->customer);
         }       
         
-        public function logOut() {
-            unset($_SESSION['customer']);
+        public function signOut() {
+            unset($_SESSION['CUSTOMER']);
         }
 
-        private function getCustomerid(){
+        private function getCustomerID(){
             return $this->customer['customerID'];
         }
 
-        private function pwGenerator(){
+        private function genPassword(){
+            $password  = "";
             $charRange = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789@#$()";
-            $pw = null;
-            $length = strlen($charRange);
-            for ($x = 0; $x < 6; $x++) {
+            $length    = strlen($charRange);
+            for($x = 0; $x < 6; $x++) {
                 $n = rand(0, $length);
-                $pw .= $charRange[$n];
+                $password .= $charRange[$n];
             }
-            return $pw;
+            return $password;
         }
         
-        
-        public function logIn($email, $password) {
-            $params = array();
-            $DB = Database::getDB(); 
-            $params['email'] = array('s' => $email);
-            $result = $DB->query("SELECT password FROM Customers WHERE (email = ?)  LIMIT 1", $params);
+        public function signIn($email, $password) {
+            $DB = Database::getDB();
+            $DB->addParam('s', $email);
+            $result = $DB->query("SELECT customerID, password FROM Customers WHERE (email = ?) LIMIT 1");
             if(!$result || !count($result)) return false;
-            $result = reset($result)['password'];
-            $result = password_verify($password , $result);
-            if(!$result) return false;
+            $result = reset($result);
+            if(!password_verify($password , $result['password'])) return false;
             else {
-                $_SESSION['customer'] = reset($result)['customerID'];
+                $_SESSION['customer'] = $result['customerID'];
                 return true;
             }
         }
         
-        public function createcustomer($email, $companyname, $contactname,$phonenumber,$address,$postalcode,$city) {
-            $params = array();
+        public function createCustomer($email, $companyname, $contactname, $phonenumber, $address, $postalcode, $city) {
             $DB = Database::getDB();
-            $password = $this->pwGenerator();
-            $params['email'] = array('s' => $email);
-            $params['compabyname'] = array('s' => $companyname);
-            $params['contactname']  = array('s' => $contactname);
-            $params['phonenumber']  = array('s' => $phonenumber);
-            $params['pass']  = array('s' => password_hash($password, PASSWORD_BCRYPT));
-            $params['address']  = array('s' => $address);
-            $params['postalcode']  = array('s' => $postalcode);
-            $params['city']  = array('s' => $city);       
-            $result= $DB->query("INSERT INTO Customers (email, companyName, contactName,phoneNumber,password,address,postalCode,city) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", $params);
-            return $result ? $password : false;
-        }
-
-        public function getOrders(){
-            $params = array();
-            $DB = Database::getDB();
-            $customerid = $this->getCustomerid();
-            
+            $password = $this->genPassword();
+            $DB->addParam('s', $email);
+            $DB->addParam('s', $companyname);
+            $DB->addParam('s', $contactname);
+            $DB->addParam('s', $phonenumber);
+            $DB->addParam('s', password_hash($password, PASSWORD_BCRYPT));
+            $DB->addParam('s', $address);
+            $DB->addParam('s', $postalcode);
+            $DB->addParam('s', $city);
+            $result  = "INSERT INTO Customers(email, companyName, contactName, phoneNumber, password, address, postalCode, city) ";
+            $result .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $result  = $DB->query($result);
+            return $result ? array('customerID' => $DB->insertID(), 'password' => $password) : false;
         }
 
     }

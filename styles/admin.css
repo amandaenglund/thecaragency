@@ -97,6 +97,9 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
     -moz-appearance:textfield;
 }
 
+.props label { width: 100px; display: inline-block; }
+.props input { width: calc(100% - 100px); }
+
 .button {    
     padding: 7px; margin: 20px 0px 10px 0px; 
     vertical-align: middle; overflow: hidden;
@@ -180,3 +183,8 @@ input[type=checkbox] { width: 20px; height: 20px; vertical-align: middle; cursor
 #image img { max-width: 100%; }
 
 #image span { font-size: 0.9em;  }
+
+textarea {
+    min-width: 100%; max-width: 1205px;
+    min-height: 150px; max-height: 150px;
+}

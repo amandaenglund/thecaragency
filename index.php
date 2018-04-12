@@ -1,3 +1,7 @@
+<?php
+require('header.php')
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,21 +66,6 @@ echo "Hello World!";
 <br/>
 </div>  
 </div> <!--stänger background-->  
-<footer>
-
-<div id="newsletter">
-    <p>Prenumerera på Kneslas nyhetsbrev</p>
-    <input type="text" id="subscribeName" placeholder="Ditt namn" /><br />
-    <input type="text" id="subscribeEmail" placeholder="Din e-post"/><br />
-    <input type="submit"  value="OK" onclick="Subscribe()" />
-</div>
-<div id="about">
-<p>The Car Agency</p>
-<p>Kungsgatan 100</p>
-<p>410 10 Göteborg</p>
-</div>
-
-</footer>
-
-</body>
-</html>
+<?php 
+require('footer.php');
+?>

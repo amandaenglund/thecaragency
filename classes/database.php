@@ -1,9 +1,6 @@
 <?php
-    
     session_start();
-    
-    require("definitions.php");
-    
+    require("definitions.php"); 
     /**
      * This class is a final class; it means that is not extendable.
      * It is also a singletone class; it means that there is only one instance of it 

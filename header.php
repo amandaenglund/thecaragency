@@ -1,6 +1,6 @@
 <?php
-require('./classes/database.php');
-require('./classes/customer.php');
+require('classes/database.php');
+require('classes/customer.php');
 
 ?>
 <!DOCTYPE html>

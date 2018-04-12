@@ -80,7 +80,11 @@ footer {
     margin:5px;
     text-decoration: none;
     display: block;
-    border: none;
+    border:1px solid #e7e7e7 ;
+}
+.dropdown-login input:nth-child(5){
+    border:none;
+    background-color:  #e7e7e7;
 }
 .dropdown-login p {
     padding-left: 5px;

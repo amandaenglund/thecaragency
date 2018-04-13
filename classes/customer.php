@@ -26,8 +26,8 @@
             unset($_SESSION['CUSTOMER']);
         }
 
-        private function getCustomerID(){
-            return $this->customer['customerID'];
+        public function getCustomerName(){
+            return $this->customer['contactName'];
         }
 
         private function genPassword(){
@@ -49,7 +49,7 @@
             $result = reset($result);
             if(!password_verify($password , $result['password'])) return false;
             else {
-                $_SESSION['customer'] = $result['customerID'];
+                $_SESSION['CUSTOMER'] = $result['customerID'];
                 return true;
             }
         }

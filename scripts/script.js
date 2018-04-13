@@ -1,3 +1,7 @@
+const checkEmail = (email) => {
+    const regEx = new RegExp(/^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/);
+    return regEx.test(email);
+};
 function Subscribe() {
     var data = {};
     
@@ -48,9 +52,19 @@ const customerSignIn = () => {
     }
     
     $.post('./server/customer.php', data, (res) => {
-        
-        //if(res.error) alert(res.error);
-        console.log(res);
+        if(res == 1){
+        window.location.reload();
+        }else{alert('E-postadress eller lösenord är fel!')}       
     });
 
 };
+const customerSignOut = () => {
+    const data = {action: 'CSIGNOUT'};
+    data.email = $('.dropdown-login').find('input').eq(0).val().trim(); 
+    
+    $.post('./server/customer.php',data , (res) => {
+    window.location.reload();    
+    });
+
+};
+

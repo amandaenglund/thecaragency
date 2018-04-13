@@ -31,10 +31,10 @@ $customer = new Customer;
         </div>
       </div>
       <div class="logout" <?php if(!$customer->isSignedIn()){echo "style='display:none;'";}?>>
-      <a class="logoutbtn"><i class="fas fa-user-circle"></i></i></a>
+      <a class="logoutbtn"><i class="fas fa-user-circle"></i></i><small><?php if($customer->isSignedIn()){echo $customer->getCustomerName();} ?></small></a>
         <div class="dropdown-logout">
-          <a href="#"><p>Mitt konto</p></a>
-          <input type="button" onclick="alert('Hello World!')" value="Logga ut">
+          <a href="customer.php"><p>Mitt konto</p></a>
+          <input type="button" onclick="customerSignOut()" value="Logga ut">
         </div>
       </div>
       <div class="kassa">

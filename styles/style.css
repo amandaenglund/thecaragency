@@ -33,6 +33,7 @@ header {
     color:silver;
     transition: 0.4s; 
     font-size: 30px; 
+    cursor: pointer;
 }
 
 .login { 

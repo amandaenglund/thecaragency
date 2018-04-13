@@ -33,3 +33,24 @@ function Subscribe() {
         } else alert('Ett fel uppstod!');
     });
 };
+const customerSignIn = () => {
+    const data = {action: 'CSIGNIN'};
+    data.email = $('.dropdown-login').find('input').eq(0).val().trim();
+    if(!checkEmail(data.email)) {
+        alert('Ange användarnamn!');
+        $('.dropdown-login').find('input').eq(0).val('')
+    }
+    
+    data.password = $('.dropdown-login').find('input').eq(1).val().trim();
+    if(data.password.length < 6) {
+        alert('Ange lösenordet! 6 bokstäver!');
+        $('.dropdown-login').find('input').eq(1).val('')
+    }
+    
+    $.post('./server/customer.php', data, (res) => {
+        
+        //if(res.error) alert(res.error);
+        console.log(res);
+    });
+
+};

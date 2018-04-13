@@ -5,9 +5,9 @@
         private $admin;
         
         public function __construct() {
-            if(isset($_SESSION['USER'])) {
+            if(isset($_SESSION['ADMIN'])) {
                 $DB = Database::getDB();
-                $DB->addParam('s', $_SESSION['USER']);
+                $DB->addParam('s', $_SESSION['ADMIN']);
                 $result = $DB->query("SELECT name, email FROM Admins WHERE (email = ?) AND (approved = 1) LIMIT 1");
                 if($result) $this->admin = reset($result);
             }
@@ -26,7 +26,7 @@
         }
         
         public function signOut() {
-            unset($_SESSION['USER']);
+            unset($_SESSION['ADMIN']);
         }
         
         public function signIn($email, $password) {
@@ -38,14 +38,14 @@
             $result = password_verify($password , $result);
             if(!$result) return false;
             else {
-                $_SESSION['USER'] = $email;
+                $_SESSION['ADMIN'] = $email;
                 return true;
             }
         }
         
         public function unapprovedUsers() {
             $DB = Database::getDB();
-            $DB->addParam('i', 1);
+            $DB->addParam('i', 0);
             $result = $DB->query("SELECT email, name FROM Admins WHERE (approved = ?)");
             return $result ? $result : array();
         }

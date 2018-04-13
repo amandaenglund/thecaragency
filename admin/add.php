@@ -40,7 +40,7 @@
                     <div class="input props"><label>Batteri</label><input id="battery" type="text" placeholder="Batteri" /></div>
                     <div class="input props"><label>Topphastighet</label><input id="maxspeed" type="text" placeholder="Topphastighet" /></div>
                     <div class="input props"><label>Acceleration</label><input id="acceleration" type="text" placeholder="Acceleration" /></div>
-                    <div class="input props"><label>Antal</label><input id="quantity" type="number" value="1" min="1" placeholder="Antal" /></div>
+                    <div class="input props"><label>Antal</label><input id="quantity" type="number" value="0" min="0" placeholder="Antal" /></div>
                 </div>
             </div>
             <div id="description" class="column">

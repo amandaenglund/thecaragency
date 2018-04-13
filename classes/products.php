@@ -1,6 +1,21 @@
 <?php
     class Products {
         
+        private $prodID;
+        
+        function __construct($prodID = 0) {
+            if($prodID) {
+                $DB = Database::getDB();
+                $DB->addParam('i', $prodID);
+                $result = $DB->query("SELECT productID FROM Products WHERE (productID = ?) LIMIT 1");
+                if(is_array($result) || count($result)) $this->prodID = reset($result)['productID'];
+            }
+        }
+        
+        public function isValid() {
+            return isset($this->prodID);
+        }
+        
         public function create($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description) {
             $DB = Database::getDB();
             $DB->addParam('s', $name);
@@ -16,24 +31,83 @@
             $result  = $DB->query($result);
             return $result ? $DB->insertID() : $result;
         }
-
-        public function getProduct($prodID) {
+        
+        public function getTotal() {
             $DB = Database::getDB();
-            $DB->addParam('i', $prodID);
-            return $DB->query("SELECT * FROM Products WHERE (productID = ?) LIMIT 1");
+            $result = $DB->query("SELECT COUNT(*) as total FROM Products");
+            return $result ? reset($result)['total']: 0;
         }
         
-        public function insertCategory($catID, $prodID) {
+        public function getProduct() {
+            if(empty($this->prodID)) return false;
+            $DB = Database::getDB();
+            $DB->addParam('i', $this->prodID);
+            $result = $DB->query("SELECT * FROM Products WHERE (productID = ?) LIMIT 1");
+            if(!$result || !count($result)) return $result;
+            else return reset($result);
+        }
+        
+        private function insertCategory($catID) {
+            if(empty($this->prodID)) return false;
             $DB = Database::getDB();
             $DB->addParam('i', $catID);
-            $DB->addParam('i', $prodID);
+            $DB->addParam('i', $this->prodID);
             return $DB->query("INSERT INTO ProductCategory (categoryID, productID) VALUES (?, ?)");
+        }
+
+        public function insertCategories($categories) {
+            foreach($categories as $category) {
+                if(!$this->insertCategory($category)) return false;
+            }
+            return true;
+        }
+        
+        public function producID($current) {
+            $current--;
+            $DB = Database::getDB();
+            $DB->addParam('i', $current);
+            $result = $DB->query("SELECT productID FROM Products ORDER BY productID DESC LIMIT ?, 1");
+            return $result ? reset($result)['productID'] : 0;
+        }
+        
+        public function getCategories() {
+            if(empty($this->prodID)) return false;
+            $DB = Database::getDB();
+            $DB->addParam('i', $this->prodID);
+            $result = $DB->query("SELECT categoryID FROM ProductCategory WHERE (productID = ?)");
+            if(!$result || !count($result)) return $result;
+            
+            $categories = array();
+            foreach($result as $value) {
+                array_push($categories, $value['categoryID']);
+            }
+            return $categories;            
         }
         
         public function update($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description) {
-            
+            if(empty($this->prodID)) return false;
+            $DB = Database::getDB();
+            $DB->addParam('s', $name);
+            $DB->addParam('i', $year);
+            $DB->addParam('i', $price);
+            $DB->addParam('s', $battery);
+            $DB->addParam('i', $maxspeed);
+            $DB->addParam('d', $acceleration);
+            $DB->addParam('i', $quantity);
+            $DB->addParam('s', $description);
+            $DB->addParam('i', $this->prodID);
+            $query  = "UPDATE Products SET name = ?, modelYear = ?, price = ?, battery = ?, maxSpeed = ?, acceleration = ?, ";
+            $query .= "unitsInStock = ?, description = ? WHERE(productID = ?)";
+            return $DB->query($query);
         }
         
-
+        public function updateCategories($categories) { 
+            if(empty($this->prodID)) return false; 
+            $DB = Database::getDB();
+            $DB->addParam('i', $this->prodID);
+            $result = $DB->query("DELETE FROM ProductCategory WHERE (productID = ?)");
+            if($result === false) return $result;
+            else return $this->insertCategories($categories);
+        }
     }
 ?>

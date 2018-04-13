@@ -188,3 +188,32 @@ textarea {
     min-width: 100%; max-width: 1205px;
     min-height: 150px; max-height: 150px;
 }
+
+.browser {
+    display: none;
+    margin-top: 10px;
+    float: left;
+}
+
+.browser label {
+    height: 24px;
+    text-align: center;
+    float: left; width: 60px;
+}
+
+.browser label i {
+    color: #666; transition: 0.25s;
+    vertical-align: bottom;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.browser label i:hover {
+    color: #666;
+    transition: 0.25s;
+}
+
+.hide {
+    display: none !important;
+}
+.show { display: block !important; }

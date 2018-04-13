@@ -1,11 +1,13 @@
 <?php
-require('classes/database.php');
-require('classes/customer.php');
-$customer = new Customer;
-?>
+  require('classes/database.php');
+  require('classes/customer.php');
+  require('classes/categories.php');
+  $customer = new Customer;
+  $categorie = new Categories;
+?> 
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>The Car Agency</title>
@@ -15,9 +17,9 @@ $customer = new Customer;
     <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./scripts/script.js"></script>
-</head>
-<body>
-<header>
+  </head>
+ <body>
+  <header>
     <div class="logo">
         <img src="./images/knesla_logo.png" alt="Knesla Logo" width="150px;">     
     </div>
@@ -41,13 +43,10 @@ $customer = new Customer;
         <a href="#" class="kassabtn"><i class="fas fa-cart-arrow-down"></i><small>(0)</small></a> 
       </div>
     </div>       
-</header>
+  </header>
 
-
-<!--Navigationskategorierna kommer sedan att importeras från Json eller databasen-->
-<div class="nav">
-Model 1 |<!--bara placeholder för nu-->
-Model 2 |<!--bara placeholder för nu-->
-Model 3 |<!--bara placeholder för nu-->
-Sport <!--bara placeholder för nu-->
-</div>
+  <div class="nav">
+    <?php 
+      $categorie = $categorie->getAll();
+      foreach($categorie as $key=>$array){echo "<a href=cars.php?catid=".$array['categoryID'].">".$array['name']."</a>"." ";}?>
+  </div>

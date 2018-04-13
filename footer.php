@@ -6,8 +6,10 @@ Vi har lyckats!
 </br>
 Vi på The Car Agency har kommit på hur man kan köra bil på 100% el.
 </br>
-Se till att beställa en idag, du kommer absolut inte ångra dig.</br>
-
+<b>Se till att beställa en idag, du kommer absolut inte ångra dig!</b>
+</br>
+</br>
+<a href="#topSite">Tillbaka till toppen av sidan</a>
 
 
 <!-- <p>Prenumerera på Kneslas nyhetsbrev</p>
@@ -16,11 +18,17 @@ Se till att beställa en idag, du kommer absolut inte ångra dig.</br>
     <input type="submit"  value="OK" onclick="Subscribe()" /> -->
 </div>
 <div id="about">
-<p>The Car Agency, 1992</p>
-<p>Kungsgatan 100E</p>
-<p>410 10 Göteborg</p>
-<p>- Practice makes perfect</p>
+<p>The Car Agency, 1992
+<br/>
+Kungsgatan 100E
+</br>
+410 10 Göteborg<br/>
+
+- <strong>Practice makes perfect</strong>
+</br>
+
 </div>
+
 
 </footer>
 </body>

@@ -11,7 +11,7 @@
         
         public function getAll() {
             $DB = Database::getDB();
-            return $DB->query("SELECT * FROM Subscribers");
+            return $DB->query("SELECT * FROM Subscribers ORDER BY name ASC");
         }
     }
     

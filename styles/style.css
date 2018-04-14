@@ -9,7 +9,7 @@ body {
     text-align: center; 
     background-color: black; 
     width: 100%;
-    min-height: 1000px;
+    min-height: 700px;
 }
  
 header {
@@ -253,3 +253,21 @@ footer a{
     text-decoration: none;
     color: aliceblue;
 }
+.customerContent{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: 100%;
+    min-height: 700px;
+}
+.customerDetails{
+    width: 30%;
+    height: 400px;
+    padding-left:10px;
+}
+
+.customerOrders{
+    width: 70%;
+    height: 400px;;
+}
+

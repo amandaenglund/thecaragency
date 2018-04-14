@@ -17,6 +17,10 @@
                 if($result) $this->customer = reset($result);
             }
         }
+
+        public function getCustomerDetails(){
+            return $this->customer;
+        }
         
         public function isSignedIn() {
             return isset($this->customer);

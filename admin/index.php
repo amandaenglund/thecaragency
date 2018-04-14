@@ -85,7 +85,7 @@
     <div class="container">
         <div class="header">
             <a href="./"><img src="../images/knesla_logo.png" /><span>KNESLA</span></a>
-            <label onclick="{$('.content>div').hide(); $('#signup').show();}"><i class="fa fa-user-plus"></i><span>Skappa konto</span></label>
+            <label onclick="{$('.content>div').hide(); $('#signup').show();}"><i class="fa fa-user-plus"></i><span>Skapa konto</span></label>
             <label onclick="{$('.content>div').hide(); $('#signin').show();}"><i class="fa fa-sign-in"></i><span>Logga in</span></label>
         </div>
         <div class="content">
@@ -102,7 +102,7 @@
                 <div class="button" onclick="signIn()">Logga in</div>
             </div>
             <div id="signup">
-                <h3 class="center">Skappa konto</h3>
+                <h3 class="center">Skapa konto</h3>
                 <div class="input">
                     <label>Namn</label>
                     <input type="text" placeholder="Namn" />
@@ -119,7 +119,7 @@
                     <label>Upprepa lösenordet</label>
                     <input type="password" placeholder="Lösenord" />
                 </div>
-                <div class="button" onclick="createAccount()">Skappa konto</div>
+                <div class="button" onclick="createAccount()">Skapa konto</div>
             </div>
         </div>
         <div class="footer">&copy; The Car Agency - Sverige <?=date('Y');?></div>

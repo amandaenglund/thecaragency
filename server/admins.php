@@ -51,17 +51,18 @@
             if($DB->getError() == 1062) $output['error'] = 'E-postadress duplicat!';
         }
         
-    } else if(($_POST['action'] == 'APPROVE') && isset($_POST['email']) && $admin->isSignedIn()) {
+    } else if(($_POST['action'] == 'APPROVE') && isset($_POST['admins']) && is_array($_POST['admins']) && $admin->isSignedIn()) {
         
-        $_POST['email'] = trim(strtolower($_POST['email']));
-        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $output['error'] = 'Fel format e-postadress!';
-            die(json_encode($output));
+        foreach($_POST['admins'] as $key => $value) {
+            $value = trim(strtolower($value));
+            if(!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                $output['error'] = 'Fel format e-postadress!';
+                die(json_encode($output));
+            } else $_POST['admins'][$key] = $value;
         }
         
-        $result = $admin->approvedUser($_POST['email']);
-        if($result) $output = array('error' => false);
-        else if($result === 0) $output['error'] = 'Användaren har redan godkänts!';
+        $result = $admin->approveUsers($_POST['admins']);
+        if(!in_array(false, $result)) $output = array('error' => false);
     }
     
     echo json_encode($output);

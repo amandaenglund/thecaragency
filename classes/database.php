@@ -28,6 +28,18 @@
             return self::$instance;
         }
         
+        public function startTransacion() {
+            return $this->mysqli->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+        }
+        
+        public function commit() {
+            return $this->mysqli->commit();
+        }
+        
+        public function rollBack() {
+            return $this->mysqli->rollback();;
+        }
+        
         public function __destruct() {
             $this->mysqli->close();
         }

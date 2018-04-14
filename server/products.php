@@ -13,14 +13,14 @@
     
     if(($_POST['action'] == 'ADD') || ($_POST['action'] == 'EDIT')) {
         
-        if(isset($_POST['categories']) || is_array($_POST['categories']) || count($_POST['categories'])) {
-            $categories = new Categories();
+        if(isset($_POST['categories']) && is_array($_POST['categories']) && count($_POST['categories'])) {
             foreach($_POST['categories'] as $key => $value) {
                 $value = intval($value);
-                if(!$categories->isValid($value)) unset($_POST['categories'][$key]);
+                $categories = new Categories($value);
+                if(!$categories->isValid()) unset($_POST['categories'][$key]);
                 else $_POST['categories'][$key] = $value;
             }
-            if(!count($_POST['categories'])) { $output['error'] = 'Välj kategorier!'; die(json_encode($output)); }
+            if(!count($_POST['categories'])) { $output['error'] = 'Välj kategorier!X'; die(json_encode($output)); }
             
         } else { $output['error'] = 'Välj kategorier!'; die(json_encode($output)); }
         
@@ -48,7 +48,7 @@
         $_POST['quantity'] = intval(preg_replace("/[^0-9]/", "", @$_POST['quantity']));
         if($_POST['quantity'] < 0) { $output['error'] = 'Ange antalet!'; die(json_encode($output)); }
 
-        $_POST['description'] = trim(preg_replace('/\s+/', ' ', str_replace("\n", "<br/>", @$_POST['description'])));
+        $_POST['description'] = str_replace("\n", "<br/>", trim(preg_replace('/\s+/', ' ', @$_POST['description'])));
         if($_POST['description'] == '') { $output['error'] = 'Ange beskrivningen!'; die(json_encode($output)); }
         
     }
@@ -85,7 +85,7 @@
         
         if($prodID = $products->producID($current)) {
             $products = new Products($prodID);
-            $output = array('product' => $products->getProduct());
+            $output = array('product' => $products->getProduct(true));
             $output['product']['categories'] = $products->getCategories();
             $output['current'] = $current;
             $output['total']   = $total;

@@ -38,7 +38,7 @@ function Subscribe() {
     });
 };
 const customerSignIn = () => {
-    const data = {action: 'CSIGNIN'};
+    const data = {action: 'SIGNIN'};
     data.email = $('.dropdown-login').find('input').eq(0).val().trim();
     if(!checkEmail(data.email)) {
         alert('Ange användarnamn!');
@@ -52,19 +52,19 @@ const customerSignIn = () => {
     }
     
     $.post('./server/customer.php', data, (res) => {
-        if(res == 1){
-        window.location.reload();
-        }else{alert('E-postadress eller lösenord är fel!')}       
+        res = JSON.parse(res);
+        if(res.error) alert(res.error);
+        else window.location.reload();       
     });
 
 };
 const customerSignOut = () => {
-    const data = {action: 'CSIGNOUT'};
-    data.email = $('.dropdown-login').find('input').eq(0).val().trim(); 
+    const data = {action: 'SIGNOUT'};
+    //data.email = $('.dropdown-login').find('input').eq(0).val().trim(); 
     
-    $.post('./server/customer.php',data , (res) => {
-    window.location.reload();    
+    $.post('./server/customer.php', data, (res) => {
+        //res = JSON.parse(res);
+        window.location.reload();    
     });
-
 };
 

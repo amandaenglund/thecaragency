@@ -1,11 +1,12 @@
 <?php
 require ('header.php');
 ?>
+<div id="content">
 <a name="topSite"></a>
 
 
-</div>
-<body id="content">
+
+
     
     <h1 class="punchLine">KNESLA</h1>
     
@@ -21,8 +22,9 @@ require ('header.php');
 
     
 </ul>
+</div>
 <?php 
 require('footer.php');
 ?>
 
-</body>
+

@@ -102,7 +102,7 @@
                 <div class="button" onclick="signIn()">Logga in</div>
             </div>
             <div id="signup">
-                <h3 class="center">Skappa konto</h3>
+                <h3 class="center">Skapa konto</h3>
                 <div class="input">
                     <label>Namn</label>
                     <input type="text" placeholder="Namn" />
@@ -119,7 +119,7 @@
                     <label>Upprepa lösenordet</label>
                     <input type="password" placeholder="Lösenord" />
                 </div>
-                <div class="button" onclick="createAccount()">Skappa konto</div>
+                <div class="button" onclick="createAccount()">Skapa konto</div>
             </div>
         </div>
         <div class="footer">&copy; The Car Agency - Sverige <?=date('Y');?></div>

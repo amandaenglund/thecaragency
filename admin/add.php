@@ -12,7 +12,7 @@
 ?>
 <div class="content">
     <div class="main">
-        <h3 class="center">Lägga till ny produkt</h3>
+        <h3 class="center">Lägg till ny produkt</h3>
         <div class="row">
             <div class="title"><span onclick="addProduct()"><i class="fa fa-save"></i></span></div>
             <div class="column">

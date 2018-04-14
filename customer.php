@@ -1,6 +1,6 @@
-<?php require ('header.php');?>
+<?php require ('header.php'); if(!$customer->isSignedIn()){header('Location: index.php'); exit; }?>
   <div class="customerContent">
-   <div class="customerDetails">
+  <div class="customerDetails">
      <h2>Specifikation</h2>
      <?php $customerSpecifi = $customer->getCustomerDetails();
      foreach($customerSpecifi as $key=>$value){

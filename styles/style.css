@@ -21,7 +21,7 @@ header {
 
 .nav {
     background-color: #b3aeae;
-    padding: 0.5em;
+    padding: 0.8em;
     text-align: center; 
 }
 .nav a{
@@ -211,11 +211,10 @@ color:white;
 
 .bildform {
     display: flex;
-    flex-direction: row wrap;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center ;
     flex-grow: 1;
     text-align: center;
-    padding: 0px;
     margin: 0px;
 }
 
@@ -225,7 +224,7 @@ footer {
     background-color: black;
     color: rgb(163, 163, 163);
     padding: 0.5em;
-    
+    border-top: 1px solid #b3aeae;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

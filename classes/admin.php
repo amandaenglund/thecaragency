@@ -50,10 +50,15 @@
             return $result ? $result : array();
         }
         
-        public function approveUser($email) {
+        public function approveUsers($admins) {
+            $result = array();
             $DB = Database::getDB();
-            $DB->addParam('s', $email);
-            return $DB->query("UPDATE Admins SET approved = 1 WHERE (email = ?) AND (approved = 0) LIMIT 1");
+            foreach($admins as $email) {
+                $DB->clearParams();
+                $DB->addParam('s', $email);
+                $result[$email] = $DB->query("UPDATE Admins SET approved = 1 WHERE (email = ?) AND (approved = 0) LIMIT 1");
+            }
+            return $result;
         }
         
         public function createUser($email, $name, $password) {

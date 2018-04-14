@@ -2,7 +2,7 @@
 
     class Categories {
         
-        private $categoryID;
+        private $categoryID = 0;
         
         function __construct($catID = 0) {
             if($catID) {
@@ -14,7 +14,6 @@
         }
         
         public function getCategory() {
-            if(empty($this->categoryID)) return false;
             $DB = Database::getDB();
             $DB->addParam('i', $this->categoryID);
             $result = $DB->query("SELECT name, description FROM Categories WHERE (categoryID = ?) LIMIT 1");
@@ -27,12 +26,11 @@
         
         public function getAll() {
             $DB = Database::getDB();
-            $result = $DB->query("SELECT categoryID, name FROM Categories ORDER BY categoryID");
+            $result = $DB->query("SELECT categoryID, name FROM Categories ORDER BY categoryID ASC");
             return ($result && count($result)) ? $result : array();
         }
         
         public function getProducts() {
-            if(empty($this->categoryID)) return false;
             $DB = Database::getDB();
             $DB->addParam('i', $this->categoryID);
             $query  = "SELECT p.productID, p.name, p.price FROM Products AS p, ProductCategory AS g ";

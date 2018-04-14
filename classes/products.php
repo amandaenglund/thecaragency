@@ -1,7 +1,7 @@
 <?php
     class Products {
         
-        private $prodID;
+        private $prodID = 0;
         
         function __construct($prodID = 0) {
             if($prodID) {
@@ -13,7 +13,7 @@
         }
         
         public function isValid() {
-            return isset($this->prodID);
+            return $this->prodID;
         }
         
         public function create($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description) {
@@ -32,6 +32,13 @@
             return $result ? $DB->insertID() : $result;
         }
         
+        public function getAll() {
+            $DB = Database::getDB();
+            $query  = "SELECT productID, name, price FROM Products";
+            $result = $DB->query($query);
+            return (!$result || !count($result)) ? array(): $result;
+        }
+        
         public function getTotal() {
             $DB = Database::getDB();
             $result = $DB->query("SELECT COUNT(*) as total FROM Products");
@@ -39,7 +46,6 @@
         }
         
         public function getProduct() {
-            if(empty($this->prodID)) return false;
             $DB = Database::getDB();
             $DB->addParam('i', $this->prodID);
             $result = $DB->query("SELECT * FROM Products WHERE (productID = ?) LIMIT 1");
@@ -48,7 +54,6 @@
         }
         
         private function insertCategory($catID) {
-            if(empty($this->prodID)) return false;
             $DB = Database::getDB();
             $DB->addParam('i', $catID);
             $DB->addParam('i', $this->prodID);
@@ -71,7 +76,6 @@
         }
         
         public function getCategories() {
-            if(empty($this->prodID)) return false;
             $DB = Database::getDB();
             $DB->addParam('i', $this->prodID);
             $result = $DB->query("SELECT categoryID FROM ProductCategory WHERE (productID = ?)");
@@ -85,7 +89,6 @@
         }
         
         public function update($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description) {
-            if(empty($this->prodID)) return false;
             $DB = Database::getDB();
             $DB->addParam('s', $name);
             $DB->addParam('i', $year);
@@ -102,7 +105,6 @@
         }
         
         public function updateCategories($categories) { 
-            if(empty($this->prodID)) return false; 
             $DB = Database::getDB();
             $DB->addParam('i', $this->prodID);
             $result = $DB->query("DELETE FROM ProductCategory WHERE (productID = ?)");

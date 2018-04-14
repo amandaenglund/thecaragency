@@ -34,7 +34,7 @@
             $DB = Database::getDB();
             $DB->addParam('i', $this->categoryID);
             $query  = "SELECT p.productID, p.name, p.price FROM Products AS p, ProductCategory AS g ";
-            $query .= "WHERE (p.productID = g.productID) AND (categoryID = ?)";
+            $query .= "WHERE (p.productID = g.productID) AND (categoryID = ?) AND (unitsInStock > 0)";
             $result = $DB->query($query);
             return (!$result || !count($result)) ? array(): $result;
         }

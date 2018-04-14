@@ -32,6 +32,13 @@
             return $result ? $DB->insertID() : $result;
         }
         
+        public function getAll() {
+            $DB = Database::getDB();
+            $query  = "SELECT productID, name, price FROM Products";
+            $result = $DB->query($query);
+            return (!$result || !count($result)) ? array(): $result;
+        }
+        
         public function getTotal() {
             $DB = Database::getDB();
             $result = $DB->query("SELECT COUNT(*) as total FROM Products");

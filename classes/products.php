@@ -34,7 +34,7 @@
         
         public function getAll() {
             $DB = Database::getDB();
-            $query  = "SELECT productID, name, price FROM Products";
+            $query  = "SELECT productID, name, price FROM Products WHERE (unitsInStock > 0)";
             $result = $DB->query($query);
             return (!$result || !count($result)) ? array(): $result;
         }

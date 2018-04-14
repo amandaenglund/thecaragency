@@ -6,7 +6,7 @@
 ?>
 <div class="content">
     <div class="main">
-        <h3 class="center">Ny administratör</h3>
+        <h3 class="center">Nya administratör</h3>
         <div id="admins" class="row">
             <div class="title"><span onclick="updateProduct()"><i class="fa fa-save"></i></span></div>
             <div class="column">

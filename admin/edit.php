@@ -21,7 +21,7 @@
 </script>
 <div class="content">
     <div class="main">
-        <h3 class="center">Redigera produkt</h3>
+        <h3 class="center">Redigera produkterna</h3>
         <div class="row">
             <div class="title">
                 <div class="browser">

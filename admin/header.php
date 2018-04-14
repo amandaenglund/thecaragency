@@ -21,8 +21,8 @@
             <a href="./home.php"><img src="../images/knesla_logo.png" /><span>KNESLA</span></a>
             <a href="./add.php"><i class="fa fa-car"></i><span>Lägg till</span></a>
             <a href="./edit.php"><i class="fa fa-car"></i><span>Redigera</span></a>
-            <a href="./orders.php"><i class="fa fa-shopping-cart"></i><span>Orderlista</span></a>
+            <a href="./orders.php"><i class="fa fa-shopping-cart"></i><span>Orderlistan</span></a>
             <a href="./newsletter.php"><i class="fa fa-envelope"></i><span>Nyhetsbrev</span></a>
-            <a href="./customers.php"><i class="fa fa-users"></i><span>Kundlista</span></a>
+            <a href="./customers.php"><i class="fa fa-users"></i><span>Kundlistan</span></a>
             <a href="./signout.php"><i class="fa fa-sign-out"></i><span>Logga ut</span></a>
         </div>

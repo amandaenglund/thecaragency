@@ -21,7 +21,7 @@
  <body>
   <header>
     <div class="logo">
-        <img src="./images/knesla_logo.png" alt="Knesla Logo" width="150px;">     
+        <a href="index.php"><img src="./images/knesla_logo.png" alt="Knesla Logo" width="150px;"></a>     
     </div>
     <div class="state">
       <div class="login" <?php if($customer->isSignedIn()){echo "style='display:none;'";}?>>

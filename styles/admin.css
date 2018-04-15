@@ -83,11 +83,14 @@ h1, h2, h3 {
 
 #signup { display: none; }
 
-.input {
+.input, .emails {
     width: 100%;
     margin-top: 10px;
     font-size: 0.9em;
 }
+
+.emails { border-bottom: 1px #aaa dotted; }
+.emails * { display: inline-block; width: 48%; margin: 0px 1%; font-size: 0.9em; }
 
 input[type=text], input[type=password], input[type=number], input[type=email] {
     padding: 0px; margin: 0px; border: 1px #ccc solid;
@@ -97,7 +100,9 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
     -moz-appearance:textfield;
 }
 
-.props label { width: 100px; display: inline-block; }
+.bold { font-weight: 700; margin-right: 5px; }
+.props * { display: inline-block; vertical-align: top; }
+.props label { width: 100px; }
 .props input { width: calc(100% - 100px); }
 
 .button {    
@@ -135,7 +140,7 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
     margin-right: 5px;
     float: right; font-size: 2em;
     margin-top: -5px; cursor: pointer;
-    color: #555; transition: 0.25s;
+    color: #777; transition: 0.25s;
 }
 
 .row > .title > span:hover {
@@ -185,9 +190,11 @@ input[type=checkbox] { width: 20px; height: 20px; vertical-align: middle; cursor
 #image span { font-size: 0.9em;  }
 
 textarea {
-    min-width: 100%; max-width: 1205px;
+    min-width: 100%; max-width: 1205px !important;
     min-height: 150px; max-height: 150px;
 }
+
+#texten { max-width: 585px !important; }
 
 .browser {
     display: none;
@@ -217,3 +224,14 @@ textarea {
     display: none !important;
 }
 .show { display: block !important; }
+
+.seperator {
+    width: 100%; margin: 2px 0px;
+    height: 1px; border-bottom: 1px #aaa dotted;
+}
+
+.input img {
+    width: 100%;
+    max-width: 130px;
+    margin-right: 10px;
+}

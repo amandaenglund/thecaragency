@@ -45,10 +45,12 @@
             return $result ? reset($result)['total']: 0;
         }
         
-        public function getProduct() {
+        public function getProduct($admin = false) {
             $DB = Database::getDB();
             $DB->addParam('i', $this->prodID);
-            $result = $DB->query("SELECT * FROM Products WHERE (productID = ?) LIMIT 1");
+            if($admin) $result = "SELECT * FROM Products WHERE (productID = ?) LIMIT 1";
+            else $result = "SELECT * FROM Products WHERE (productID = ?) AND (unitsInStock > 0) LIMIT 1";
+            $result = $DB->query($result);
             if(!$result || !count($result)) return $result;
             else return reset($result);
         }

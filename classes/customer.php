@@ -1,21 +1,33 @@
 <?php
-/*
- - Som inloggad kund ska man kunna markera sin beställning som mottagen 
 
- - När man är inloggad som kund ska man kunna se sina gjorda beställningar och om det är skickade eller inte 
-
- + När besökare gör en beställning ska hen få ett lösenord till sidan där man kan logga in som kund*/
     class Customer {
         
         private $customer;
         
-        public function __construct() {
-            if(isset($_SESSION['CUSTOMER'])) {
+        public function __construct($customerID = 0) {
+            $customerID = $customerID ?? $_SESSION['CUSTOMER'] ?? 0;           
+            if($customerID) {
                 $DB = Database::getDB();
-                $DB->addParam('i', $_SESSION['CUSTOMER']);
+                $DB->addParam('i', $customerID);
                 $result = $DB->query("SELECT * FROM Customers WHERE (customerID = ?) LIMIT 1");
                 if($result) $this->customer = reset($result);
             }
+        }
+        
+        public function getCurrent($current) {
+            $current--;
+            $DB = Database::getDB();
+            $DB->addParam('i', 3*$current);
+            $result = $DB->query("SELECT * FROM Customers ORDER BY customerID DESC LIMIT ?, 3");
+            if(is_array($result)) { foreach($result as $key => $value) { unset($result[$key]['password']); } }
+            return (!$result || !count($result)) ? false : $result;
+        }
+        
+        public function getTotal() {
+            $DB = Database::getDB();
+            $result = $DB->query("SELECT COUNT(*) AS total FROM Customers");            
+            $result = (!$result || !count($result)) ? 0 : reset($result)['total'];
+            return ($result%3 == 0) ? intval($result/3) : (intval($result/3) + 1);
         }
         
         public function isSignedIn() {
@@ -26,8 +38,8 @@
             unset($_SESSION['CUSTOMER']);
         }
 
-        public function getCustomerName(){
-            return $this->customer['contactName'];
+        public function getCustomer(){
+            return isset($this->customer) ? $this->customer : false;
         }
 
         private function genPassword(){
@@ -70,7 +82,6 @@
             $result  = $DB->query($result);
             return $result ? array('customerID' => $DB->insertID(), 'password' => $password) : false;
         }
-
     }
     
 ?>

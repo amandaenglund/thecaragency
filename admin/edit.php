@@ -3,7 +3,8 @@
     
     $files = glob('../images/'.$admin->getEmail().'/*');
     foreach($files as $file){ if(is_file($file)) unlink($file);}
-    @rmdir('../images/'.$admin->getEmail());
+    $files = '../images/'.$admin->getEmail();
+    if(is_dir($files)) @rmdir($files);
     unset($files); unset($file);
     
     require('../classes/categories.php');
@@ -14,14 +15,9 @@
     $total = new Products();
     $total = $total->getTotal();
 ?>
-<script>
-    var current = 1, prodID = 0;
-    var total = <?=$total;?>;
-    getProduct();
-</script>
 <div class="content">
     <div class="main">
-        <h3 class="center">Redigera produkterna</h3>
+        <h3 class="center">Redigera produkt</h3>
         <div class="row">
             <div class="title">
                 <div class="browser">
@@ -68,4 +64,9 @@
         </div>
     </div>
 </div>
+<script>
+    var current = 1, prodID = 0;
+    var total = <?=$total;?>;
+    getProduct();
+</script>
 <?php require('footer.php'); ?>

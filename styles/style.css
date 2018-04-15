@@ -3,10 +3,13 @@ body {
     padding: 0;
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 0.1em;
-    background-color: black; 
+    
 }
 #content{
     text-align: center; 
+    background-color: black; 
+    width: 100%;
+    min-height: 700px;
 }
  
 header {
@@ -18,7 +21,7 @@ header {
 
 .nav {
     background-color: #b3aeae;
-    padding: 0.5em;
+    padding: 0.8em;
     text-align: center; 
 }
 .nav a{
@@ -162,6 +165,7 @@ header {
 .punchLine {
     font-size: 8vw;
     font-family:Impact, sans-serif;
+    margin-top:0; 
     -webkit-animation: fadein 8s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 8s; /* Firefox < 16 */
      -ms-animation: fadein 8s; /* Internet Explorer */
@@ -207,11 +211,10 @@ color:white;
 
 .bildform {
     display: flex;
-    flex-direction: row wrap;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center ;
     flex-grow: 1;
     text-align: center;
-    padding: 0px;
     margin: 0px;
 }
 
@@ -221,7 +224,7 @@ footer {
     background-color: black;
     color: rgb(163, 163, 163);
     padding: 0.5em;
-    
+    border-top: 1px solid #b3aeae;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -245,3 +248,25 @@ li {
 li:nth-child(1) {
 	margin-right: auto; /*applied only to the right*/
 }
+footer a{
+    text-decoration: none;
+    color: aliceblue;
+}
+.customerContent{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: 100%;
+    min-height: 700px;
+}
+.customerDetails{
+    width: 30%;
+    height: 400px;
+    padding-left:10px;
+}
+
+.customerOrders{
+    width: 70%;
+    height: 400px;;
+}
+

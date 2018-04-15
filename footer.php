@@ -9,7 +9,7 @@ Vi på The Car Agency har kommit på hur man kan köra bil på 100% el.
 <b>Se till att beställa en idag, du kommer absolut inte ångra dig!</b>
 </br>
 </br>
-<a href="#topSite">Tillbaka till toppen av sidan</a>
+<a href="#topSite"><i class="fas fa-arrow-up"></i> Tillbaka till toppen av sidan</a>
 
 
 <!-- <p>Prenumerera på Kneslas nyhetsbrev</p>

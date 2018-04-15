@@ -5,7 +5,11 @@
         private $customer;
         
         public function __construct($customerID = 0) {
-            $customerID = $customerID ?? $_SESSION['CUSTOMER'] ?? 0;           
+            if(!$customerID) {
+                if(empty($_SESSION['CUSTOMER'])) $customerID = 0;
+                else $customerID = $_SESSION['CUSTOMER'];
+            }
+            
             if($customerID) {
                 $DB = Database::getDB();
                 $DB->addParam('i', $customerID);

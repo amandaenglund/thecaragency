@@ -11,7 +11,7 @@ Password: admin
 <a href="http://farochmehri.wieg17.se/thecaragency/admin/">DEMO Admin</a>
 ### Ambitionsnivå: VG
 
-<a href="http://farochmehri.wieg17.se/thecaragency/">DEMO</a>
+<a href="http://amandaenglund.wieg17.se/thecaragency/">DEMO</a>
 
 
 # Projektbeskrivning:

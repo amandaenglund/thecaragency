@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="logout" <?php if(!$customer->isSignedIn()){echo "style='display:none;'";}?>>
-      <a class="logoutbtn"><i class="fas fa-user-circle"></i></i><small><?php if($customer->isSignedIn()){echo $customer->getCustomerName();} ?></small></a>
+      <a class="logoutbtn"><i class="fas fa-user-circle"></i></i><small><?php if($customer->isSignedIn()){echo $customer->getCustomer()['contactName'];} ?></small></a>
         <div class="dropdown-logout">
           <a href="customer.php"><p>Mitt konto</p></a>
           <input type="button" onclick="customerSignOut()" value="Logga ut">

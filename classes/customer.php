@@ -5,7 +5,11 @@
         private $customer;
         
         public function __construct($customerID = 0) {
-            $customerID = $customerID ?? $_SESSION['CUSTOMER'] ?? 0;           
+            if(!$customerID) {
+                if(empty($_SESSION['CUSTOMER'])) $customerID = 0;
+                else $customerID = $_SESSION['CUSTOMER'];
+            }
+            
             if($customerID) {
                 $DB = Database::getDB();
                 $DB->addParam('i', $customerID);
@@ -81,6 +85,13 @@
             $result .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $result  = $DB->query($result);
             return $result ? array('customerID' => $DB->insertID(), 'password' => $password) : false;
+        }
+
+        public function gerOrders(){
+            $DB = Database::getDB();
+            $result = "SELECT o.orderID,op.productID,p.name,o.status FROM Orders AS o INNER JOIN OrderedProducts AS op ON o.orderID = op.orderID INNER JOIN Products AS p ON op.productID = p.productID WHERE o.customerID = 1005 ";
+            $result  = $DB->query($result);
+            return $result;
         }
     }
     

@@ -269,4 +269,24 @@ footer a{
     width: 70%;
     height: 400px;;
 }
-
+table, th, td {
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px 25px 15px 25px;
+    text-align: left;    
+}
+tr:nth-child(even) {
+    background-color: silver;
+}
+td input{
+    border:none;
+    padding: 3px 8px 3px 8px;
+    color:whitesmoke;
+    background-color: #158200;
+    border-radius: 2px;
+    transition: 0.5s;
+}
+td input:hover{
+    padding: 3px 15px 3px 15px;
+}

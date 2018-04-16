@@ -49,4 +49,5 @@
     <?php 
       $categorie = $categorie->getAll();
       foreach($categorie as $key=>$array){echo "<a href=cars.php?catid=".$array['categoryID'].">".$array['name']."</a>"." ";}?>
+ <a href="./cars.php">Alla Bilar</a>
   </div>

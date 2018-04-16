@@ -11,7 +11,7 @@
 
 
 
-<div id="content">
+<div class="content">
 <?php 
        echo '<div class="ProduktInfo">';   
        echo '<h2 style="color:white;">'.$product['name'].'</h2>';
@@ -24,7 +24,7 @@
     echo "<p>Acceleration: ".$product['acceleration'].'</p>';
     echo "<p>Antal produkter i lagret: ".$product['unitsInStock'].'</p>';
     echo "<div>Beskrivning: </br>".$product['description'].'</div>';
-       echo '<button><a href="car.php?carid='.$product['productID'].'">Handla denna produkt</a></button>';
+       echo '<button class="nyfikenButton"><a href="car.php?carid='.$product['productID'].'">Handla denna produkt</a></button>';
        echo '<br/>';
        echo '</div>';
   ?>

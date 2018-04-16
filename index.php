@@ -1,7 +1,7 @@
 <?php
 require ('header.php');
 ?>
-<div id="content">
+<div class="content">
     <a name="topSite"></a> 
     <h1 class="punchLine">KNESLA</h1>
     <ul class="bildform">   

@@ -19,10 +19,12 @@
    }
    
 ?>
-<div id="content">
+<div class="content">
   <?php 
-  echo '<h1 style="color: white;">'. $catName. '</h1>';
-  echo '<h4 style="color: white;">'. $catDesc. '</h4>';
+  echo '<div style="padding: 0px 50px;">';  
+  echo '<h1 class="catName">'. $catName. '</h1>';
+  echo '<h4>'. $catDesc. '</h4>';
+  echo '</div>';
   foreach($products as $value) {
        echo '<div>';   
        echo '<h2 style="color:white;">'.$value['name'].'</h2>';
@@ -30,7 +32,7 @@
     echo '<a href="car.php?carid='.$value['productID'].'">';
     echo '<img src="./images/'.$value['productID'].'.jpg" /></a>';
     echo "<br/>";
-       echo '<button><a href="car.php?carid='.$value['productID'].'">Jag är nyfiken på denna!</a></button>';
+       echo '<button class="nyfikenButton"><a href="car.php?carid='.$value['productID'].'">Jag är nyfiken på denna!</a></button>';
        echo '<br/>';
        echo '<br/>';
        echo '<br/>';

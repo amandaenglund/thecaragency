@@ -84,7 +84,7 @@
 </head><body>
     <div class="container">
         <div class="header">
-            <a href="./"><img src="../images/knesla_logo.png" /><span>KNESLA</span></a>
+            <a href="./"><img src="../images/knesla_logo.png" width="300px;"/></a>
             <label onclick="{$('.content>div').hide(); $('#signup').show();}"><i class="fa fa-user-plus"></i><span>Skapa konto</span></label>
             <label onclick="{$('.content>div').hide(); $('#signin').show();}"><i class="fa fa-sign-in"></i><span>Logga in</span></label>
         </div>

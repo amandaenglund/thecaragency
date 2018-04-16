@@ -5,18 +5,21 @@ body {
     letter-spacing: 0.1em;
     
 }
-#content{
+.content{
     text-align: center; 
+    color: white;
     background-color: black; 
-    width: 100%;
     min-height: 700px;
+    width: 100%;
+    padding: 50px 0px 150px 0px;
+
 }
  
 header {
     display: flex;
-    padding: 0.2em;
     align-items: stretch;
     background-color:black;
+    width: 100%;
 }
 
 .nav {
@@ -164,7 +167,7 @@ header {
 
 .punchLine {
     font-size: 8vw;
-    font-family:Impact, sans-serif;
+    font-family: Impact, sans-serif;
     margin-top:0; 
     -webkit-animation: fadein 8s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 8s; /* Firefox < 16 */
@@ -289,4 +292,24 @@ td input{
 }
 td input:hover{
     padding: 3px 15px 3px 15px;
+}
+
+/*STYLING OF PRODUCT PAGES*/
+
+.catName {
+    font-size: 5.5em;
+    font-family: Impact, sans-serif;
+
+}
+
+.nyfikenButton {
+    font-size: 16px; 
+    padding: 12px 28px; 
+    background-color: #4CAF50;
+    margin: 20px;
+}
+
+.nyfikenButton a {
+    text-decoration: none;
+    color: white;
 }

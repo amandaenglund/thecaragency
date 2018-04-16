@@ -20,8 +20,8 @@
     echo '<h3>Specifikationer</h3>';
     echo '<p>Tillverkad år: '.$product['modelYear'].'</p>';
     echo "<p>Batterityp: ".$product['battery'].'</p>';
-    echo "<p>Toppfart: ".$product['maxSpeed'].'</p>';
-    echo "<p>Acceleration: ".$product['acceleration'].'</p>';
+    echo "<p>Toppfart: ".$product['maxSpeed'].'km/h</p>';
+    echo "<p>Acceleration: ".$product['acceleration'].'sekunder (0-100km/h)</p>';
     echo "<p>Antal produkter i lagret: ".$product['unitsInStock'].'</p>';
     echo "<div>Beskrivning: </br>".$product['description'].'</div>';
        echo '<button class="nyfikenButton"><a href="car.php?carid='.$product['productID'].'">Handla denna produkt</a></button>';

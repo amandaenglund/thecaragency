@@ -89,10 +89,19 @@
 
         public function gerOrders(){
             $DB = Database::getDB();
-            $result = "SELECT o.orderID,op.productID,p.name,o.status FROM Orders AS o INNER JOIN OrderedProducts AS op ON o.orderID = op.orderID INNER JOIN Products AS p ON op.productID = p.productID WHERE o.customerID = 1005 ";
+            $result = "SELECT o.orderID,op.productID,p.name,o.status FROM Orders AS o INNER JOIN OrderedProducts AS op ON o.orderID = op.orderID INNER JOIN Products AS p ON op.productID = p.productID WHERE o.customerID =";
+            $result .= $this->customer['customerID']; 
             $result  = $DB->query($result);
             return $result;
         }
+
+        public function changeStatus($orderid) {
+            $DB = Database::getDB();
+            $DB->addParam('i', 1);
+            $DB->addParam('i', $orderid);
+            return $DB->query("UPDATE Orders SET status = ? WHERE (orderID = ?)");
+        }
     }
+
     
 ?>

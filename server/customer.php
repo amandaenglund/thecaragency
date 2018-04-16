@@ -32,6 +32,8 @@
     } else if(($_POST['action'] == 'SIGNOUT')) {
         $customer->signOut();
         $output['error'] = false;
+    }elseif(($_POST['action'] == 'changeState') && isset($_POST['orderID'])){
+       if($customer->changeStatus($_POST['orderID'])) $output['error'] = false; 
     }
     
     echo json_encode($output);

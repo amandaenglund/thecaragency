@@ -60,10 +60,14 @@ const customerSignIn = () => {
 };
 const customerSignOut = () => {
     const data = {action: 'SIGNOUT'};
-    //data.email = $('.dropdown-login').find('input').eq(0).val().trim(); 
-    
     $.post('./server/customer.php', data, (res) => {
-        //res = JSON.parse(res);
+        window.location.reload();    
+    });
+};
+const changeState = () => {
+    const data = {action: 'changeState'};
+    data.orderID = $('.status').attr('id'); 
+    $.post('./server/customer.php', data, (res) => {
         window.location.reload();    
     });
 };

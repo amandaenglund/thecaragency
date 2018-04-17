@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>The Car Agency</title>
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.css" />   
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>

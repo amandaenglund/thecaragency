@@ -151,7 +151,6 @@ header {
     display: inline-block; 
 }
 .state{
-    padding-top:10px ;
     flex-grow: 2;
 }
 .kassabtn{

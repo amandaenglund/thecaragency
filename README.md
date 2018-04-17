@@ -1,9 +1,9 @@
 
 ## Grupparbete - Webshop
-## THE CAR AGENCY
+# THE CAR AGENCY
 ### Medlemmar: Faroch, Pedram, André, Amanda
 
-# Kontaktperson: André Edström - 0763096174📱
+### Kontaktperson: André Edström - 0763096174📱
 
 ### Inloggningsuppgifter
 Inlogg Kund: kund4@test.com

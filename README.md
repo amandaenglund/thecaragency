@@ -49,8 +49,8 @@ Senare året 1992 - november - Janne Kemi var på nattklubb tillsammans med sin 
 #### Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i session på servern (G)
 #### ✅Man ska från hemsidan kunna skriva upp sig för att få butikens nyhetsbrev genom att ange sitt namn och epostadress (G)
 #### ✅Administratörer ska kunna se en lista över personer som vill ha nyhetsbrevet och deras epost adresser (G)
-#### Besökare ska kunna välja ett av flera fraktalternativ (G)
-#### Tillgängliga fraktalternativ ska vara hämtade från databasen (G)
+#### ✅Besökare ska kunna välja ett av flera fraktalternativ (G)
+#### ✅Tillgängliga fraktalternativ ska vara hämtade från databasen (G)
 
 
 ### VG

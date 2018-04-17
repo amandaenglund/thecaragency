@@ -4,14 +4,21 @@
 ### Medlemmar: Faroch, Pedram, André, Amanda
 
 ### Inloggningsuppgifter
-Inlogg: admin@thecaragency.se
+Inlogg Kund: kund4@test.com
+<br/>
+Password: AQ0Fq5
+<br/>
+
+<a href="http://amandaenglund.wieg17.se/thecaragency/">DEMO</a>
+
+Inlogg Admin: admin@thecaragency.se
 <br/>
 Password: admin
 <br/>
 <a href="http://farochmehri.wieg17.se/thecaragency/admin/">DEMO Admin</a>
 ### Ambitionsnivå: VG
 
-<a href="http://amandaenglund.wieg17.se/thecaragency/">DEMO</a>
+
 
 
 # Projektbeskrivning:
@@ -57,4 +64,4 @@ Senare året 1992 - november - Janne Kemi var på nattklubb tillsammans med sin 
 #### ✅Administratörer ska kunna lägga till och ta bort produkter (VG)
 
 # Slutsats: 
-Vi har, i ett fokuserat och schysst tempo jobbat med detta projektet tillsammans för att lösa alla issues som projektet bestått utav. Varje dag innan lektion har vi gått igenom uppgifterna, delat upp de i olika svårighetsgrader så att alla kan påverka och vi har hjälpt varandra när man kört fast i problem i koden. Helgerna har gått åt med att jobba med projektet - och det har gjort att vi legat i framkant med tidsschemat. Tack /A & A & F & P
+Vi har, i ett fokuserat och schysst tempo jobbat med detta projektet tillsammans för att lösa alla issues som projektet bestått utav. Varje dag innan lektion har vi gått igenom uppgifterna, delat upp de i olika svårighetsgrader så att alla kan påverka och vi har hjälpt varandra när man kört fast i problem i koden. Helgerna har gått åt med att jobba med projektet - och det har gjort att vi legat i framkant med tidsschemat. Tack café TinTin, Condecco och andra caféer för många, många timmar av kodning i era fotöljer och goda kaffe. /A & A & F & P

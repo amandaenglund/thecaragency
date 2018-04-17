@@ -16,20 +16,39 @@
             return $this->prodID;
         }
         
-        public function create($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description) {
-            $DB = Database::getDB();
-            $DB->addParam('s', $name);
-            $DB->addParam('i', $year);
-            $DB->addParam('i', $price);
-            $DB->addParam('s', $battery);
-            $DB->addParam('i', $maxspeed);
-            $DB->addParam('d', $acceleration);
-            $DB->addParam('i', $quantity);
-            $DB->addParam('s', $description);
-            $result  = "INSERT INTO Products (name, modelYear, price, battery, maxSpeed, acceleration, unitsInStock, description) ";
-            $result .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $result  = $DB->query($result);
-            return $result ? $DB->insertID() : $result;
+        public function create($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description, $categories) {            
+            try {
+                $DB = Database::getDB();
+                $DB->startTransacion();
+                $DB->addParam('s', $name);
+                $DB->addParam('i', $year);
+                $DB->addParam('i', $price);
+                $DB->addParam('s', $battery);
+                $DB->addParam('i', $maxspeed);
+                $DB->addParam('d', $acceleration);
+                $DB->addParam('i', $quantity);
+                $DB->addParam('s', $description);
+                $query  = "INSERT INTO Products (name, modelYear, price, battery, maxSpeed, acceleration, unitsInStock, description) ";
+                $query .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                if(!$DB->query($query)) throw new Exception('Insert into Products error!');
+                $result = $DB->insertID();
+                
+                foreach($categories as $value) {
+                    $DB->clearParams();
+                    $DB->addParam('i', $value);
+                    $DB->addParam('i', $result);
+                    $query = "INSERT INTO ProductCategory (categoryID, productID) VALUES (?, ?)";
+                    if(!$DB->query($query)) throw new Exception('Insert into ProductCategory error!');
+                }
+                
+                $DB->commit();
+                
+            } catch(Exception $e) {
+                $DB->rollBack();
+                $result = false;
+            }
+            
+            return $result;
         }
         
         public function getAll() {
@@ -55,21 +74,7 @@
             else return reset($result);
         }
         
-        private function insertCategory($catID) {
-            $DB = Database::getDB();
-            $DB->addParam('i', $catID);
-            $DB->addParam('i', $this->prodID);
-            return $DB->query("INSERT INTO ProductCategory (categoryID, productID) VALUES (?, ?)");
-        }
-
-        public function insertCategories($categories) {
-            foreach($categories as $category) {
-                if(!$this->insertCategory($category)) return false;
-            }
-            return true;
-        }
-        
-        public function producID($current) {
+        public function getCurrent($current) {
             $current--;
             $DB = Database::getDB();
             $DB->addParam('i', $current);
@@ -90,28 +95,69 @@
             return $categories;            
         }
         
-        public function update($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description) {
-            $DB = Database::getDB();
-            $DB->addParam('s', $name);
-            $DB->addParam('i', $year);
-            $DB->addParam('i', $price);
-            $DB->addParam('s', $battery);
-            $DB->addParam('i', $maxspeed);
-            $DB->addParam('d', $acceleration);
-            $DB->addParam('i', $quantity);
-            $DB->addParam('s', $description);
-            $DB->addParam('i', $this->prodID);
-            $query  = "UPDATE Products SET name = ?, modelYear = ?, price = ?, battery = ?, maxSpeed = ?, acceleration = ?, ";
-            $query .= "unitsInStock = ?, description = ? WHERE(productID = ?)";
-            return $DB->query($query);
+        public function update($name, $year, $price, $battery, $maxspeed, $acceleration, $quantity, $description, $categories) {
+            try {
+                $result = true;
+                $DB = Database::getDB();
+                $DB->startTransacion();
+                $DB->addParam('s', $name);
+                $DB->addParam('i', $year);
+                $DB->addParam('i', $price);
+                $DB->addParam('s', $battery);
+                $DB->addParam('i', $maxspeed);
+                $DB->addParam('d', $acceleration);
+                $DB->addParam('i', $quantity);
+                $DB->addParam('s', $description);
+                $DB->addParam('i', $this->prodID);
+                $query  = "UPDATE Products SET name = ?, modelYear = ?, price = ?, battery = ?, maxSpeed = ?, acceleration = ?, ";
+                $query .= "unitsInStock = ?, description = ? WHERE(productID = ?)";
+                if($DB->query($query) === false) throw new Exception('Update Products error!');
+                
+                $DB->clearParams();
+                $DB->addParam('i', $this->prodID);
+                $query = "DELETE FROM ProductCategory WHERE (productID = ?)";
+                if(!$DB->query($query)) throw new Exception('Delete from ProductCategory error!');
+                
+                foreach($categories as $value) {
+                    $DB->clearParams();
+                    $DB->addParam('i', $value);
+                    $DB->addParam('i', $this->prodID);
+                    $query = "INSERT INTO ProductCategory (categoryID, productID) VALUES (?, ?)";
+                    if(!$DB->query($query)) throw new Exception('Insert into ProductCategory error!');
+                }
+                
+                $DB->commit();
+                
+            } catch(Exception $e) {
+                $DB->rollBack();
+                $result = false;
+            }
+            
+            return $result;
         }
         
-        public function updateCategories($categories) { 
-            $DB = Database::getDB();
-            $DB->addParam('i', $this->prodID);
-            $result = $DB->query("DELETE FROM ProductCategory WHERE (productID = ?)");
-            if($result === false) return $result;
-            else return $this->insertCategories($categories);
+        public function delete() {
+            try {
+                $result = true;
+                $DB = Database::getDB();
+                $DB->startTransacion();
+                $DB->addParam('i', $this->prodID);
+                $query = "DELETE FROM ProductCategory WHERE (productID = ?)";
+                if(!$DB->query($query)) throw new Exception('Delete from ProductCategory error!');
+                
+                $DB->clearParams();
+                $DB->addParam('i', $this->prodID);
+                $query = "DELETE FROM Products WHERE (productID = ?)";
+                if(!$DB->query($query)) throw new Exception('Delete from Products error!');                
+                
+                $DB->commit();
+                
+            } catch(Exception $e) {
+                $DB->rollBack();
+                $result = false;
+            }
+            
+            return $result;
         }
     }
 ?>

@@ -13,6 +13,13 @@
             }
         }
         
+        public function removeUDir() {
+            $files = glob('../images/'.$this->getEmail().'/*');
+            foreach($files as $file){ if(is_file($file)) unlink($file); }
+            $files = '../images/'.$this->getEmail();
+            if(is_dir($files)) @rmdir($files);
+        }
+        
         public function isSignedIn() {
             return isset($this->admin);
         }

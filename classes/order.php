@@ -44,10 +44,9 @@
             else return $DB->query("UPDATE Orders SET status = ? WHERE (orderID = ?)");
         }
         
-        public function getStatus() {
-            $order = $this->getOrder();
-            if($order['status'] === 1) return 'Hämtad';
-            else if($order['status'] === 0) return 'Skickad';
+        public function statusTXT($status) {
+            if($status === 1) return 'Mottagen';
+            else if($status === 0) return 'Skickad';
             else return 'Beställd';
         }
         
@@ -66,27 +65,28 @@
             $DB->addParam('i', $this->orderID);
             $result = $DB->query("SELECT * FROM Orders WHERE (orderID = ?) LIMIT 1");
             if(!$result && !count($result)) return false;
-            $order = reset($result);
+            $order = reset($result); 
             
             $DB->clearParams();
             $DB->addParam('i', $order['shipperID']);
             $result = $DB->query("SELECT * FROM Shippers WHERE (shipperID = ?) LIMIT 1");
             if(!$result && !count($result)) return false;
             $result = reset($result); unset($order['shipperID']);
-            $order['shipping'] = array('name' => $result['name'], 'time' => $result['deliveryTime'], 'cost' => $order['shippingcost']);
-            unset($order['shippingcost']);
+            $order['shipping'] = array('name' => $result['name'], 'time' => $result['deliveryTime'], 'cost' => $order['shippingCost']);
+            unset($order['shippingCost']);
             
             $DB->clearParams();
             $DB->addParam('i', $this->orderID);
             $result  = "SELECT o.productID, o.unitPrice, o.quantity, p.name FROM OrderedProducts AS o, ";
             $result .= "Products AS p WHERE (o.orderID = ?) AND (o.productID = p.productID)";
             $result  = $DB->query($result);
-            if(!$result && !count($result)) return false;
+            if(!$result && !count($result)) return false;             
             foreach($result as $value) {
                 $order['products'][$value['productID']] = array(
                     'name' => $value['name'], 'price' => $value['unitPrice'], 'quantity' => $value['quantity']
                 );
             }
+            
             return $order;
         }
         
@@ -94,19 +94,12 @@
             return $this->orderID;
         }
         
-        public function placeOrder($shipperID, $customerID, $products) {
+        public function placeOrder($shipperID, $customer, $products) {
             $result = array('error' => false);
 
             $shipper = new Shipper($shipperID);
             if(!$shipper->isValid()) {
-                $result['error'] = true;
-                return $result;
-            }
-            
-            $customer = new Customer($customerID);
-            $customer = $customer->getCustomer();
-            if(!$customer) {
-                $result['error'] = true;
+                $result['error'] = "SHIPPER";
                 return $result;
             }
 
@@ -127,28 +120,48 @@
             $products = $temp;
             if(!$total) $result['error'] = 'EMPTY';
             if($result['error']) return $result;
-            
-            $order = array();
-            $order['customerID']         = $customerID;
-            $order['shipperID']          = $shipperID;
-            $order['customerName']       = $customer['companyName'] ? $customer['companyName'] : $customer['contactName'];            
-            $order['deliveryAddress']    = $customer['address'];            
-            $order['deliveryPostalCode'] = $customer['postalCode'];            
-            $order['deliveryCity']       = $customer['city'];            
-            $order['shippingcost']       = $shipper->getCost($total);
+            $shippingCost = $shipper->getCost($total);
             
             try {
                 $DB = Database::getDB();
                 $DB->startTransacion();
-                $DB->addParam('i', $order['customerID']);
-                $DB->addParam('i', $order['shipperID']);
-                $DB->addParam('s', $order['customerName']);
-                $DB->addParam('s', $order['deliveryAddress']);
-                $DB->addParam('s', $order['deliveryPostalCode']);
-                $DB->addParam('s', $order['deliveryCity']);
-                $DB->addParam('i', $order['shippingcost']);
+                
+                $temp = new Customer();
+                if($customerID = $temp->isSignedIn()) {
+                    $temp = $temp->update(
+                        $customer['companyName'], $customer['contactName'], $customer['phoneNumber'], 
+                        $customer['address'], $customer['postalCode'], $customer['city']
+                    );
+                    if($temp === false) throw new Exception('Customer update failed!');
+                    
+                } else {
+
+                    $temp = $temp->create(
+                        $customer['email'], $customer['companyName'],  $customer['contactName'],
+                        $customer['phoneNumber'], $customer['address'], $customer['postalCode'], $customer['city']
+                    );
+                    
+                    if($temp === false) {
+                        if($DB->getError() == 1062) $result['error'] = 'DUPLICATE';
+                        throw new Exception('Customer creating failed!');
+                        
+                    } else {
+                        $password = $temp['password'];
+                        $customerID = $temp['customerID'];
+                    }
+                }
+
+                unset($temp);
+                $DB->clearParams();
+                $DB->addParam('i', $customerID);
+                $DB->addParam('i', $shipperID);
+                $DB->addParam('s', $customer['companyName'] ? $customer['companyName'] : $customer['contactName']);
+                $DB->addParam('s', $customer['address']);
+                $DB->addParam('s', $customer['postalCode']);
+                $DB->addParam('s', $customer['city']);
+                $DB->addParam('i', $shippingCost);
                 $query  = "INSERT INTO Orders (customerID, shipperID, customerName, deliveryAddress, deliveryPostalCode, ";
-                $query .= "deliveryCity, shippingcost) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $query .= "deliveryCity, shippingCost) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 if(!$DB->query($query)) throw new Exception('Orders insert failed!');
                 $orderID = $DB->insertID();
                 
@@ -158,23 +171,25 @@
                     $DB->addParam('i', $orderID);
                     $DB->addParam('i', $value['unitPrice']);
                     $DB->addParam('i', $value['quantity']);
-                    $temp = $DB->query("INSERT INTO OrderedProducts (productID, orderID, unitPrice, quantity) VALUES (?, ?, ?, ?)");
-                    if(!$temp) throw new Exception('OrderedProducts insert failed!');
+                    $query = "INSERT INTO OrderedProducts (productID, orderID, unitPrice, quantity) VALUES (?, ?, ?, ?)";
+                    if(!$DB->query($query)) throw new Exception('OrderedProducts insert failed!');
                     
                     $DB->clearParams();
                     $DB->addParam('i', $value['quantity']);
                     $DB->addParam('i', $key);
-                    $temp = $DB->query("UPDATE Products SET unitsInStock = unitsInStock - ? WHERE (productID = ?)");
-                    if(!$temp) throw new Exception('Update the quantity of the products failed!');
+                    $query = "UPDATE Products SET unitsInStock = unitsInStock - ? WHERE (productID = ?)";
+                    if(!$DB->query($query)) throw new Exception('Update the quantity of the products failed!');
                 }
                 
                 $DB->commit();
                 
-                $result = array('orderID' => $orderID);
+                $result['orderID'] = $orderID;
+                $result['customerID'] = $customerID;
+                if(isset($password)) $result['password'] = $password;
                 
             } catch (Exception $e) {
                 $DB->rollBack();
-                $result['error'] = true;
+                if(!$result['error']) $result['error'] = true;
             }
             
             return $result;

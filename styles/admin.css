@@ -137,7 +137,7 @@ input[type=text], input[type=password], input[type=number], input[type=email] {
 }
 
 .row > .title > span {
-    margin-right: 5px;
+    margin-right: 10px;
     float: right; font-size: 2em;
     margin-top: -5px; cursor: pointer;
     color: #777; transition: 0.25s;

@@ -1,5 +1,5 @@
 <?php
-
+    
     class Categories {
         
         private $categoryID = 0;
@@ -33,10 +33,18 @@
         public function getProducts() {
             $DB = Database::getDB();
             $DB->addParam('i', $this->categoryID);
-            $query  = "SELECT p.productID, p.name, p.price FROM Products AS p, ProductCategory AS g ";
-            $query .= "WHERE (p.productID = g.productID) AND (categoryID = ?) AND (unitsInStock > 0)";
-            $result = $DB->query($query);
-            return (!$result || !count($result)) ? array(): $result;
+            $result = "SELECT productID FROM ProductCategory WHERE (categoryID = ?)";
+            $result = $DB->query($result);
+            if(!$result || !count($result)) return array();
+            
+            $products = array();
+            foreach($result as $value) {
+                $temp = new Products($value['productID']);
+                $temp = $temp->getProduct();
+                if(isset($temp['productID'])) array_push($products, $temp);
+            }
+            
+            return $products;
         }
     }
     

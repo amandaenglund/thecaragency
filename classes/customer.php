@@ -2,19 +2,17 @@
 
     class Customer {
         
-        private $customer;
+        private $customerID = 0;
         
         public function __construct($customerID = 0) {
-            if(!$customerID) {
-                if(empty($_SESSION['CUSTOMER'])) $customerID = 0;
-                else $customerID = $_SESSION['CUSTOMER'];
-            }
+            
+            if(!$customerID && isset($_SESSION['CUSTOMER'])) $customerID = $_SESSION['CUSTOMER'];
             
             if($customerID) {
                 $DB = Database::getDB();
                 $DB->addParam('i', $customerID);
-                $result = $DB->query("SELECT * FROM Customers WHERE (customerID = ?) LIMIT 1");
-                if($result) $this->customer = reset($result);
+                $result = $DB->query("SELECT customerID FROM Customers WHERE (customerID = ?) LIMIT 1");
+                if($result) $this->customerID = reset($result)['customerID'];
             }
         }
         
@@ -33,9 +31,9 @@
             $result = (!$result || !count($result)) ? 0 : reset($result)['total'];
             return ($result%3 == 0) ? intval($result/3) : (intval($result/3) + 1);
         }
-        
+
         public function isSignedIn() {
-            return isset($this->customer);
+            return $this->customerID;
         }       
         
         public function signOut() {
@@ -43,7 +41,15 @@
         }
 
         public function getCustomer(){
-            return isset($this->customer) ? $this->customer : false;
+            $DB = Database::getDB();
+            $DB->addParam('i', $this->customerID);
+            $result = $DB->query("SELECT * FROM Customers WHERE (customerID = ?) LIMIT 1");
+            if(!$result || !count($result)) return false;
+            else {
+                $result = reset($result);
+                unset($result['password']);
+                return $result;
+            }
         }
 
         private function genPassword(){
@@ -70,7 +76,7 @@
             }
         }
         
-        public function createCustomer($email, $companyname, $contactname, $phonenumber, $address, $postalcode, $city) {
+        public function create($email, $companyname, $contactname, $phonenumber, $address, $postalcode, $city) {
             $DB = Database::getDB();
             $password = $this->genPassword();
             $DB->addParam('s', $email);
@@ -81,27 +87,54 @@
             $DB->addParam('s', $address);
             $DB->addParam('s', $postalcode);
             $DB->addParam('s', $city);
-            $result  = "INSERT INTO Customers(email, companyName, contactName, phoneNumber, password, address, postalCode, city) ";
-            $result .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $result  = $DB->query($result);
-            return $result ? array('customerID' => $DB->insertID(), 'password' => $password) : false;
+            $temp  = "INSERT INTO Customers(email, companyName, contactName, phoneNumber, password, address, postalCode, city) ";
+            $temp .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $temp  = $DB->query($temp);
+            return $temp ? array('customerID' => $DB->insertID(), 'password' => $password) : false;
         }
-
+    
+        public function update($companyname, $contactname, $phonenumber, $address, $postalcode, $city) { 
+            $DB = Database::getDB();
+            $DB->addParam('s', $companyname);
+            $DB->addParam('s', $contactname);
+            $DB->addParam('s', $phonenumber);
+            $DB->addParam('s', $address);
+            $DB->addParam('s', $postalcode);
+            $DB->addParam('s', $city);
+            $DB->addParam('i', $this->customerID);
+            $query  = "UPDATE Customers SET companyName = ?, contactName = ?, phoneNumber = ?, ";
+            $query .= "address = ?, postalCode = ?, city = ? WHERE (customerID = ?)";
+            return $DB->query($query);
+        }
+        
+        /*public function gerOrders() {
+            $DB = Database::getDB();
+            $DB->addParam('i', $this->customerID);
+            $result = "SELECT orderID FROM Orders WHERE (customerID = ?)";
+            $result = $DB->query($result);
+            if(!$result || !count($result)) return array();
+            
+            $orders = array();
+            foreach($result as $value) {
+                $temp = new Order($value['orderID']);
+                $order = $temp->getOrder();
+                if($order) {
+                    $order['statusTXT'] = $temp->statusTXT($order['status']);
+                    array_push($orders, $order);
+                }
+            }
+            
+            return $orders;
+        }*/
+        
+        //???????
         public function gerOrders(){
             $DB = Database::getDB();
-            $result = "SELECT o.orderID,op.productID,p.name,o.status FROM Orders AS o INNER JOIN OrderedProducts AS op ON o.orderID = op.orderID INNER JOIN Products AS p ON op.productID = p.productID WHERE o.customerID =";
-            $result .= $this->customer['customerID']; 
-            $result  = $DB->query($result);
-            return $result;
+            $result  = "SELECT o.orderID,op.productID,p.name,o.status FROM Orders AS o INNER JOIN OrderedProducts AS op ON o.orderID = op.orderID ";
+            $result .= "INNER JOIN Products AS p ON op.productID = p.productID WHERE o.customerID = $this->customerID";
+            return $DB->query($result);
         }
 
-        public function changeStatus($orderid) {
-            $DB = Database::getDB();
-            $DB->addParam('i', 1);
-            $DB->addParam('i', $orderid);
-            return $DB->query("UPDATE Orders SET status = ? WHERE (orderID = ?)");
-        }
     }
-
     
 ?>

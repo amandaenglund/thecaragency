@@ -30,14 +30,13 @@
         $total = $order->getTotal();
         if($current > $total) $current = $total;
         
-        if($order = $order->getCurrent($current)) {
+        if($order = $order->getCurrent($current)) { 
             $order  = new Order($order);
             $output = array('order' => $order->getOrder());
-            $output['order']['statusTXT'] = $order->getStatus();
+            $output['order']['statusTXT'] = $order->statusTXT($output['order']['status']);
             $output['current'] = $current;
             $output['total']   = $total;
-        }
-        
+        }        
     }
     
     echo json_encode($output);

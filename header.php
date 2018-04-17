@@ -2,8 +2,14 @@
   require('classes/database.php');
   require('classes/customer.php');
   require('classes/categories.php');
+  
+  require('classes/cart.php');
+  
   $customer = new Customer;
   $categorie = new Categories;
+  
+  $cart = new Cart();
+  $cart = $cart->getQuantity(); 
 ?> 
 <!DOCTYPE html>
 <html>
@@ -12,7 +18,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>The Car Agency</title>
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.css" />   
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>
@@ -41,7 +46,7 @@
         </div>
       </div>
       <div class="kassa">
-        <a href="#" class="kassabtn"><i class="fas fa-cart-arrow-down"></i><small>(0)</small></a> 
+        <a href="<?=$cart ? './checkout.php' : 'javascript:void(0)';?>" class="kassabtn"><i class="fas fa-cart-arrow-down"></i><small><?=$cart ? " ($cart)" : '';?></small></a> 
       </div>
     </div>       
   </header>

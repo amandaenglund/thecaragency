@@ -26,16 +26,19 @@
         $image = getimagesize($filename);
         
         if($image['mime'] != 'image/jpeg') {
+            @unlink($filename);
             $output['error'] = 'Bildtypen måste vara jpg!';
             die(json_encode($output));
         }
 
         if($image[0] != 800) {
+            @unlink($filename);
             $output['error'] = 'Bildens bredd ska vara 800px!';
             die(json_encode($output));
         }
 
         if($image[1] != 533) {
+            @unlink($filename);
             $output['error'] = 'Bildens höjd ska vara 533px!';
             die(json_encode($output));
         }

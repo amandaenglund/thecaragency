@@ -1,6 +1,8 @@
 <?php
    require ('header.php');
    
+   require('classes/products.php');
+   
    if(isset($_GET['catid'])) {
        $products = new Categories($_GET['catid']);
        if(!$products->isValid()) die(header('Location: ./'));
@@ -13,7 +15,6 @@
    } else {
        $catName = 'Alla Kneslor';
        $catDesc = 'The Car Agency´s modell KNESLA står för hållbar utveckling, funktionalitet och en drömisk, skön känsla på vägen.';
-       require('./classes/products.php');
        $products = new Products();
        $products = $products->getAll();
    }

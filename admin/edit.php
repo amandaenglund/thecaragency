@@ -1,12 +1,8 @@
 <?php 
     require('header.php');
     
-    $files = glob('../images/'.$admin->getEmail().'/*');
-    foreach($files as $file){ if(is_file($file)) unlink($file);}
-    $files = '../images/'.$admin->getEmail();
-    if(is_dir($files)) @rmdir($files);
-    unset($files); unset($file);
-    
+    $admin->removeUDir();
+        
     require('../classes/categories.php');
     $categories = new Categories();
     $categories = $categories->getAll();
@@ -28,6 +24,7 @@
                     <label><i title="Sista" class="fa fa-angle-double-right" onclick="getProduct(current = total)"></i></label>
                 </div>
                 <span onclick="updateProduct()"><i class="fa fa-save"></i></span>
+                <span onclick="deleteProduct()"><i class="fa fa-trash"></i></span>
             </div>
             <div class="column">
                 <div class="title">

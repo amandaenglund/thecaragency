@@ -18,7 +18,7 @@
 </head><body>
     <div class="container">
         <div class="header">
-            <a href="./home.php"><img src="../images/knesla_logo.png" width="300px;"/></a>
+            <a href="./home.php"><img src="../images/knesla_logo.png" /><span>KNESLA</span></a>
             <a href="./add.php"><i class="fa fa-car"></i><span>Lägg till</span></a>
             <a href="./edit.php"><i class="fa fa-car"></i><span>Redigera</span></a>
             <a href="./orders.php"><i class="fa fa-shopping-cart"></i><span>Orderlista</span></a>

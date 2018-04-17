@@ -32,8 +32,14 @@
     } else if(($_POST['action'] == 'SIGNOUT')) {
         $customer->signOut();
         $output['error'] = false;
-    }elseif(($_POST['action'] == 'changeState') && isset($_POST['orderID'])){
-       if($customer->changeStatus($_POST['orderID'])) $output['error'] = false; 
+        
+    } else if(($_POST['action'] == 'changeState') && isset($_POST['orderID'])){
+        if(!$customer->isSignedIn()) die(json_encode($output));
+        require('../classes/order.php');
+        $order = new Order($_POST['orderID']);
+        if(!$order->isValid()) die(json_encode($output));
+        if(!$order->changeStatus(RECEIVED)) die(json_encode($output));
+        $output['error'] = false; 
     }
     
     echo json_encode($output);

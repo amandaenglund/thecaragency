@@ -1,3 +1,16 @@
+const deleteProduct = () => {
+    const data = {action: 'DELETE', prodID: prodID};
+    if(confirm("Är du säker på att radera produkten?"))
+    $.post('../server/products.php', data, (res) => {
+        res = JSON.parse(res);
+        if(res.error) alert(res.error);
+        else {
+            alert('Produkten raderas!');
+            getProduct();
+        }
+    });
+};
+
 const getOrders = () => {
     $('.row > .title > span').remove();    
     const data = {action: 'GET', current: current};
@@ -258,7 +271,7 @@ const checkProduct = () => {
     if(data.maxspeed == '') { alert('Ange topphastigheten!'); $('#maxspeed').focus(); return false;  }
     
     data.acceleration = parseFloat($('#acceleration').val().replace(',', '.').replace(/[^0-9\.]/g, ''));
-    if(isNaN(data.acceleration) || (data.acceleration <= 0) || (data.acceleration >= 10)) { 
+    if(isNaN(data.acceleration) || (data.acceleration <= 0) || (data.acceleration >= 100)) { 
         alert('Accelerationen måste vara mellan 0.1 till 99.9!'); $('#acceleration').focus(); return false; 
     }
 

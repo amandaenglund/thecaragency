@@ -41,7 +41,7 @@
         
         $_POST['acceleration'] = str_replace(",", ".", @$_POST['acceleration']);
         $_POST['acceleration'] = floatval(preg_replace("/[^0-9\.]/", "", $_POST['acceleration']));
-        if(($_POST['acceleration'] <= 0) || ($_POST['acceleration'] >= 10)) {
+        if(($_POST['acceleration'] <= 0) || ($_POST['acceleration'] >= 100)) {
             $output['error'] = 'Accelerationen måste vara mellan 0.1 till 99.9!'; die(json_encode($output));
         }        
 
@@ -60,16 +60,12 @@
         
         $products = new Products();
         $prodID = $products->create(
-            $_POST['name'], $_POST['year'], $_POST['price'], $_POST['battery'], 
-            $_POST['maxspeed'], $_POST['acceleration'], $_POST['quantity'], $_POST['description']
+            $_POST['name'], $_POST['year'], $_POST['price'], $_POST['battery'], $_POST['maxspeed'],
+            $_POST['acceleration'], $_POST['quantity'], $_POST['description'], $_POST['categories']
         );
         
-        if(!$prodID) die(json_encode($output)); else $products = new Products($prodID); 
+        if(!$prodID) die(json_encode($output)); 
         if(!rename ('../images/'.$admin->getEmail().'/'.$image, "../images/$prodID.jpg")) { 
-            $output['error'] = $prodID; die(json_encode($output));
-        }
-        
-        if(!$products->insertCategories($_POST['categories'])) {
             $output['error'] = $prodID; die(json_encode($output));
         }
         
@@ -83,7 +79,7 @@
         $total = $products->getTotal();
         if($current > $total) $current = $total;
         
-        if($prodID = $products->producID($current)) {
+        if($prodID = $products->getCurrent($current)) {
             $products = new Products($prodID);
             $output = array('product' => $products->getProduct(true));
             $output['product']['categories'] = $products->getCategories();
@@ -92,9 +88,10 @@
         }
         
     } else if(($_POST['action'] == 'EDIT') && isset($_POST['prodID'])) {
-        $prodID = intval($_POST['prodID']); unset($_POST['prodID']);
-        $product = new Products($prodID);
-        if(!$product->isValid()) { $output['error'] = 'Ogiltigt produkt-id!'; die(json_encode($output)); }
+        
+        $product = new Products($_POST['prodID']);
+        $prodID  = $product->isValid();
+        if(!$prodID) { $output['error'] = 'Ogiltigt produkt-id!'; die(json_encode($output)); }
         
         $image = explode('/', @$_POST['image']); $image = end($image);
         if($image == "$prodID.jpg") unset($image);
@@ -102,15 +99,25 @@
         if(isset($image) && !rename ('../images/'.$admin->getEmail().'/'.$image, "../images/$prodID.jpg")) die(json_encode($output));
         
         $result = $product->update(
-            $_POST['name'], $_POST['year'], $_POST['price'], $_POST['battery'], 
-            $_POST['maxspeed'], $_POST['acceleration'], $_POST['quantity'], $_POST['description']
+            $_POST['name'], $_POST['year'], $_POST['price'], $_POST['battery'], $_POST['maxspeed'],
+            $_POST['acceleration'], $_POST['quantity'], $_POST['description'], $_POST['categories']
         );
-        if($result === false) die(json_encode($output));
         
-        $result = $product->updateCategories($_POST['categories']);
-        if($result === false) die(json_encode($output));
+        if(!$result) die(json_encode($output));
         
         $output = array('success' => $prodID);
+        
+    } else if(($_POST['action'] == 'DELETE') && isset($_POST['prodID'])) {
+        
+        $product = new Products($_POST['prodID']);
+        $prodID  = $product->isValid();
+        if(!$prodID) { $output['error'] = 'Ogiltigt produkt-id!'; die(json_encode($output)); }
+        $result  = $product->delete();
+        if(!$result) die(json_encode($output));
+        
+        @unlink("../images/$prodID.jpg");
+        
+        $output['error'] = false;        
     }
     
     echo json_encode($output)

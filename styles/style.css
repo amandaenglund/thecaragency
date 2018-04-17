@@ -231,7 +231,6 @@ footer {
     flex-direction: row;
     justify-content: space-around;
     bottom: 0; right: 0; width: 100%;
-    position: fixed;
 }
 
 /*************/
@@ -269,7 +268,7 @@ footer a{
 
 .customerOrders{
     width: 70%;
-    height: 400px;;
+    height: 400px;
 }
 table, th, td {
     border-collapse: collapse;
@@ -311,4 +310,67 @@ td input:hover{
 .nyfikenButton a {
     text-decoration: none;
     color: white;
+}
+
+/* Checkout */
+.row {
+    width: 100%;
+    max-width: 1280px;
+    margin: 20px auto;
+}
+
+.row > .column {
+    float: left;
+    display: inline-block;
+    vertical-align: top;
+    width: 48%; margin: 1%;
+}
+
+.row > .column > h4 { text-align: left; }
+
+.row > .column > .product {
+    width: 100%; border-bottom: 1px #ccc dotted; font-size: 0.9em;
+    padding: 5px 0px; text-align: left; line-height: 25px;
+}
+
+.row > .column > .product > * {
+    display: inline-block; vertical-align: top;
+}
+
+.row > .column > .product > img {
+    width: 120px; margin-right: 10px;
+}
+
+.row > .column > .product a {
+    color: #ffdcb7; text-decoration: none;
+}
+
+.row > .column > .product a:hover {
+    text-decoration: underline;
+}
+
+.row > .column > .product input {
+    width:  50px; text-indent: 5px;
+}
+
+.row > .column > .product input[type=radio] {
+    width: 20px; height: 20px; vertical-align: middle; cursor: pointer;
+}
+
+.cstmr {
+    text-align: left; padding: 10px; font-size: 0.9em;
+}
+
+.cstmr label { display: inline-block; width: 120px; }
+
+.cstmr button { padding: 20px; font-size: 1.5em; margin-left: 50px; cursor: pointer; }
+
+.cstmr input {
+    text-indent: 5px; height: 20px;
+}
+
+.cstmr input[type=checkbox] {
+    vertical-align: middle;
+    width: 20px; height: 20px;
+    cursor: pointer; margin-right: 10px;
 }

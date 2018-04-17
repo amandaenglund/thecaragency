@@ -105,10 +105,6 @@
             return $output;
         }
         
-        public function optimize($table) {
-            $this->mysqli->query("OPTIMIZE TABLE $table");
-        }
-        
         public function insertID() {
             return $this->mysqli->insert_id;
         }

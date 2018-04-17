@@ -1,11 +1,7 @@
 <?php 
     require('header.php');
     
-    $files = glob('../images/'.$admin->getEmail().'/*');
-    foreach($files as $file){ if(is_file($file)) unlink($file);}
-    $files = '../images/'.$admin->getEmail();
-    if(is_dir($files)) @rmdir($files);
-    unset($files); unset($file);
+    $admin->removeUDir();
     
     require('../classes/categories.php');
     $categories = new Categories();

@@ -17,7 +17,7 @@ Inlogg Admin: admin@thecaragency.se
 <br/>
 Password: admin
 <br/>
-<a href="http://farochmehri.wieg17.se/thecaragency/admin/">DEMO Admin</a>
+<a href="http://amandaenglund.wieg17.se/thecaragency/admin/">DEMO Admin</a>
 ### Ambitionsnivå: VG
 
 
@@ -41,12 +41,12 @@ Senare året 1992 - november - Janne Kemi var på nattklubb tillsammans med sin 
 #### ✅All data som programmet utnyttjar ska vara sparat i en MYSQL databas (produkter, beställningar, konton mm) (G)
 #### ✅Det ska finnas ett normaliserat diagram över databasen i gitrepot G) Man ska kunna logga in som administratör i systemet (G)
 #### ✅Inga Lösenord får sparas i klartext i databasen (G)
-#### En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G)
+#### ✅En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G)
 #### ✅Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan (G)
 #### ✅Administratörer ska kunna se alla en lista på alla gjorda beställningar (G) 
 #### ✅Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera (G)
 #### ✅Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori (G)
-#### Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i session på servern (G)
+#### ✅Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i session på servern (G)
 #### ✅Man ska från hemsidan kunna skriva upp sig för att få butikens nyhetsbrev genom att ange sitt namn och epostadress (G)
 #### ✅Administratörer ska kunna se en lista över personer som vill ha nyhetsbrevet och deras epost adresser (G)
 #### ✅Besökare ska kunna välja ett av flera fraktalternativ (G)
@@ -57,7 +57,7 @@ Senare året 1992 - november - Janne Kemi var på nattklubb tillsammans med sin 
 #### ✅Man ska kunna registrera sig som administratör på sidan, nya användare ska sparas i databasen (VG)
 #### ✅En administratör behöver godkännas av en tidigare administratör innan man kan logga in (VG)
 #### ✅Administratörer ska kunna markera beställningar som skickade (VG)
-#### När man gör en beställning ska man också få chansen att skriva upp sig för nyhetsbrevet (VG)
+#### ✅När man gör en beställning ska man också få chansen att skriva upp sig för nyhetsbrevet (VG)
 #### ✅När besökare gör en beställning ska hen få ett lösenord till sidan där man kan logga in som kund (VG)
 #### ✅När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte (VG)
 #### ✅Som inloggad kund ska man kunna markera sin beställning som mottagen (VG)
